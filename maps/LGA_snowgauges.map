@@ -1,0 +1,19 @@
+MAP_NAME LGA_snow_gauges
+#
+ICONDEF S_GAUGE 12
+0 -5
+0 5
+32767 32767
+-5 0
+5 0
+32767 32767
+4 4
+-4 -4
+32767 32767
+-4 4
+4 -4
+32767 32767
+#                                                                                        
+ICON S_GAUGE 40.77920 -73.88000 4 4  LGA1
+ICON S_GAUGE 40.64317 -73.80820 4 4  JFK1
+ICON S_GAUGE 40.68270 -74.17750 4 4  EWR1

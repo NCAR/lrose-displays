@@ -1,0 +1,13 @@
+All of the digitizing which I have done has a "1" after the file name,
+except the optional, compulsory, and other markers where pilots report.
+Not all of the optional pilot reportings are in the file; should be soon.
+
+The overlays are set so that my map appears automatically.
+
+The airports, however, have not been updated, but are still set
+so they appear when the program is run.  There is a new icon for
+the airports, which can be found under Airports1.
+
+
+There is also a grid, showing lat and lon, which is set to off, but is
+a good measure to check accuracy of the locations of everything.

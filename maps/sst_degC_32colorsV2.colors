@@ -1,0 +1,37 @@
+# goes ch2 color scale -- based on Greg T. web page
+
+# Dan Megenhardt, Jan 2001
+
+-6      -3    #6E1291 
+-3      -0.1  #5A26A5 
+-0.1    0.1   black
+0.1     2     #463AB9 
+2       4     #324ECD 
+4       6     #1E62E1 
+6       8     #0A76F5 
+8      10     #0A89FF 
+10     12     #1E9DFF 
+12     13     #32B1FF 
+13     14     #46C5FF 
+14     15     #5AD9FF 
+15     16     #6EEDFF 
+16     17     #80FFFA 
+17     18     #80FFD2 
+18     19     #80FFAA 
+19     20     #80FF82 
+20     21     #A5FF80 
+21     22     #CDFF80 
+22     23     #F5FF80 
+23     24     #FFF071 
+24     25     #FFDC5D 
+25     26     #FFC849 
+26     27     #FFB434 
+27     28     #FFA020 
+28     29     #FF8C0C 
+29     30     #F77800 
+30     31     #E36400 
+31     32     #CF5000 
+32     34     #BB3C00 
+34     36     #A72800 
+36     38     #931400 
+38     40     #800000 

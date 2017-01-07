@@ -1,0 +1,285 @@
+MAP_NAME WORLD_VOLCANOES
+#
+ICONDEF CROSS 6
+0 -5
+0 5
+32767 32767
+-5 0 
+5 0
+32767 32767
+#
+ICON CROSS  38.78    15.21 8 -5 Stromboli                     
+ICON CROSS  37.73    15.00 8 -5 Etna                          
+ICON CROSS  13.60    40.67 8 -5 Erta Ale                      
+ICON CROSS  11.58    42.47 8 -5 Ardoukoba                     
+ICON CROSS  -2.75    35.90 8 -5 Lengai, Ol Doinyo             
+ICON CROSS  -1.40    29.20 8 -5 Nyamuragira                   
+ICON CROSS  -1.52    29.25 8 -5 Nyiragongo                    
+ICON CROSS   4.20     9.17 8 -5 Cameroon                      
+ICON CROSS  28.60    61.60 8 -5 Taftan                        
+ICON CROSS -11.75    43.38 8 -5 Karthala                      
+ICON CROSS -21.22    55.71 8 -5 Fournaise, Piton de la        
+ICON CROSS -37.72    77.82 8 -5 Boomerang Seamount            
+ICON CROSS -53.10    73.51 8 -5 Heard                         
+ICON CROSS -53.03    72.60 8 -5 McDonald Islands              
+ICON CROSS -46.90    37.75 8 -5 Marion Island                 
+ICON CROSS -37.52   177.18 8 -5 White Island                  
+ICON CROSS -38.12   176.50 8 -5 Okataina                      
+ICON CROSS -39.13   175.64 8 -5 Tongariro                     
+ICON CROSS -39.28   175.57 8 -5 Ruapehu                       
+ICON CROSS -35.74   178.47 8 -5 Rumble III                    
+ICON CROSS -29.27  -177.92 8 -5 Raoul Island                  
+ICON CROSS -25.88  -177.18 8 -5 Monowai Seamount              
+ICON CROSS -20.85  -175.53 8 -5 Unnamed                       
+ICON CROSS -20.57  -175.38 8 -5 Hunga Tonga-Hunga Ha'apai     
+ICON CROSS -19.18  -174.87 8 -5 Metis Shoal                   
+ICON CROSS -18.99  -174.77 8 -5 Home Reef                     
+ICON CROSS -18.32  -174.36 8 -5 Unnamed                       
+ICON CROSS -15.62  -173.67 8 -5 Curacoa                       
+ICON CROSS -15.60  -175.63 8 -5 Niuafo'ou                     
+ICON CROSS -14.21  -169.05 8 -5 Vailulu'u                     
+ICON CROSS  -3.03   147.78 8 -5 Unnamed                       
+ICON CROSS  -4.10   145.06 8 -5 Manam                         
+ICON CROSS  -4.64   145.96 8 -5 Karkar                        
+ICON CROSS  -5.35   147.12 8 -5 Long Island                   
+ICON CROSS  -5.52   148.12 8 -5 Ritter Island                 
+ICON CROSS  -5.52   148.42 8 -5 Langila                       
+ICON CROSS  -5.05   151.33 8 -5 Ulawun                        
+ICON CROSS  -4.27   152.20 8 -5 Rabaul                        
+ICON CROSS  -6.14   155.19 8 -5 Bagana                        
+ICON CROSS  -9.02   157.95 8 -5 Kavachi                       
+ICON CROSS -10.38   165.80 8 -5 Tinakula                      
+ICON CROSS -13.80   167.47 8 -5 Suretamatai                   
+ICON CROSS -14.27   167.50 8 -5 Gaua                          
+ICON CROSS -15.40   167.83 8 -5 Aoba                          
+ICON CROSS -16.25   168.12 8 -5 Ambrym                        
+ICON CROSS -16.50   168.34 8 -5 Lopevi                        
+ICON CROSS -16.68   168.37 8 -5 Epi                           
+ICON CROSS -16.82   168.53 8 -5 Kuwae                         
+ICON CROSS -19.52   169.42 8 -5 Yasur                         
+ICON CROSS -20.98   170.28 8 -5 Eastern Gemini Seamount       
+ICON CROSS -25.78   168.63 8 -5 Unnamed                       
+ICON CROSS  12.29    93.87 8 -5 Barren Island                 
+ICON CROSS   4.91    96.32 8 -5 Peuet Sague                   
+ICON CROSS   0.68    99.53 8 -5 Sorikmarapi                   
+ICON CROSS  -0.38   100.47 8 -5 Marapi                        
+ICON CROSS  -0.97   100.67 8 -5 Talang                        
+ICON CROSS  -1.81   101.26 8 -5 Kerinci                       
+ICON CROSS  -3.52   102.62 8 -5 Kaba                          
+ICON CROSS  -4.03   103.13 8 -5 Dempo                         
+ICON CROSS  -6.10   105.42 8 -5 Krakatau                      
+ICON CROSS  -6.77   107.60 8 -5 Tangkubanparahu               
+ICON CROSS  -7.25   108.05 8 -5 Galunggung                    
+ICON CROSS  -7.24   109.20 8 -5 Slamet                        
+ICON CROSS  -7.20   109.92 8 -5 Dieng Volc Complex            
+ICON CROSS  -7.30   109.99 8 -5 Sundoro                       
+ICON CROSS  -7.54   110.44 8 -5 Merapi                        
+ICON CROSS  -7.93   112.30 8 -5 Kelut                         
+ICON CROSS  -8.10   112.92 8 -5 Semeru                        
+ICON CROSS  -7.94   112.95 8 -5 Tengger Caldera               
+ICON CROSS  -8.12   114.04 8 -5 Raung                         
+ICON CROSS  -8.05   114.24 8 -5 Ijen                          
+ICON CROSS  -8.24   115.37 8 -5 Batur                         
+ICON CROSS  -8.34   115.50 8 -5 Agung                         
+ICON CROSS  -8.42   116.47 8 -5 Rinjani                       
+ICON CROSS  -8.25   118.00 8 -5 Tambora                       
+ICON CROSS  -8.18   119.05 8 -5 Sangeang Api                  
+ICON CROSS  -8.62   120.52 8 -5 Ranakah                       
+ICON CROSS  -8.73   120.98 8 -5 Inielika                      
+ICON CROSS  -8.80   121.18 8 -5 Ebulobo                       
+ICON CROSS  -8.88   121.63 8 -5 Iya                           
+ICON CROSS  -8.75   121.83 8 -5 Kelimutu                      
+ICON CROSS  -8.32   121.70 8 -5 Paluweh                       
+ICON CROSS  -8.53   122.77 8 -5 Lewotobi                      
+ICON CROSS  -8.34   123.25 8 -5 Iliboleng                     
+ICON CROSS  -8.54   123.59 8 -5 Iliwerung                     
+ICON CROSS  -8.51   124.14 8 -5 Sirung                        
+ICON CROSS  -6.73   129.50 8 -5 Nila                          
+ICON CROSS  -4.52   129.87 8 -5 Banda Api                     
+ICON CROSS  -0.17   121.60 8 -5 Colo [Una Una]                
+ICON CROSS   1.10   124.72 8 -5 Soputan                       
+ICON CROSS   1.35   124.79 8 -5 Lokon-Empung                  
+ICON CROSS   1.35   124.85 8 -5 Mahawu                        
+ICON CROSS   2.78   125.48 8 -5 Karangetang [Api Siau]        
+ICON CROSS   3.67   125.50 8 -5 Awu                           
+ICON CROSS   1.68   127.88 8 -5 Dukono                        
+ICON CROSS   1.47   127.64 8 -5 Ibu                           
+ICON CROSS   1.37   127.52 8 -5 Gamkonora                     
+ICON CROSS   0.80   127.32 8 -5 Gamalama                      
+ICON CROSS   0.32   127.40 8 -5 Makian                        
+ICON CROSS  10.41   123.13 8 -5 Canlaon                       
+ICON CROSS  12.77   124.05 8 -5 Bulusan                       
+ICON CROSS  13.25   123.68 8 -5 Mayon                         
+ICON CROSS  14.00   120.99 8 -5 Taal                          
+ICON CROSS  15.13   120.35 8 -5 Pinatubo                      
+ICON CROSS  19.07   122.20 8 -5 Didicas                       
+ICON CROSS  27.87   128.23 8 -5 Iwo-Tori-shima                
+ICON CROSS  29.53   129.72 8 -5 Suwanose-jima                 
+ICON CROSS  30.43   130.22 8 -5 Kuchinoerabu-jima             
+ICON CROSS  30.78   130.28 8 -5 Kikai                         
+ICON CROSS  31.58   130.67 8 -5 Sakura-jima                   
+ICON CROSS  31.93   130.87 8 -5 Kirishima                     
+ICON CROSS  32.75   130.30 8 -5 Unzen                         
+ICON CROSS  32.88   131.10 8 -5 Aso                           
+ICON CROSS  33.08   131.25 8 -5 Kuju                          
+ICON CROSS  34.92   139.12 8 -5 Izu-Tobu                      
+ICON CROSS  35.90   137.48 8 -5 On-take                       
+ICON CROSS  36.22   137.58 8 -5 Yake-dake                     
+ICON CROSS  36.92   138.03 8 -5 Niigata-Yake-yama             
+ICON CROSS  36.40   138.53 8 -5 Asama                         
+ICON CROSS  36.62   138.55 8 -5 Kusatsu-Shirane               
+ICON CROSS  37.62   140.28 8 -5 Adatara                       
+ICON CROSS  37.73   140.25 8 -5 Azuma                         
+ICON CROSS  39.08   140.03 8 -5 Chokai                        
+ICON CROSS  39.75   140.80 8 -5 Akita-Komaga-take             
+ICON CROSS  39.97   140.77 8 -5 Akita-Yake-yama               
+ICON CROSS  34.73   139.38 8 -5 Oshima                        
+ICON CROSS  34.08   139.53 8 -5 Miyake-jima                   
+ICON CROSS  31.92   139.92 8 -5 Bayonnaise Rocks              
+ICON CROSS  30.48   140.32 8 -5 Tori-shima                    
+ICON CROSS  27.24   140.87 8 -5 Nishino-shima                 
+ICON CROSS  26.12   141.10 8 -5 Kaitoku Seamount              
+ICON CROSS  24.75   141.33 8 -5 Iwo-jima                      
+ICON CROSS  24.41   141.41 8 -5 Kita-Fukutokutai              
+ICON CROSS  24.28   141.52 8 -5 Fukutoku-okanoba              
+ICON CROSS  23.50   141.90 8 -5 Minami-Hiyoshi                
+ICON CROSS  21.92   143.44 8 -5 Fukujin                       
+ICON CROSS  20.53   144.90 8 -5 Farallon de Pajaros           
+ICON CROSS  20.42   145.03 8 -5 Ahyi                          
+ICON CROSS  20.13   145.10 8 -5 Supply Reef                   
+ICON CROSS  18.13   145.80 8 -5 Pagan                         
+ICON CROSS  15.62   145.57 8 -5 Ruby                          
+ICON CROSS  42.07   140.68 8 -5 Komaga-take                   
+ICON CROSS  42.53   140.83 8 -5 Usu                           
+ICON CROSS  42.70   141.33 8 -5 Shikotsu                      
+ICON CROSS  43.42   142.68 8 -5 Tokachi                       
+ICON CROSS  43.38   144.02 8 -5 Akan                          
+ICON CROSS  44.35   146.27 8 -5 Tiatia                        
+ICON CROSS  45.02   147.87 8 -5 Grozny Group                  
+ICON CROSS  45.38   148.83 8 -5 Medvezhia                     
+ICON CROSS  46.04   150.05 8 -5 Kolokol Group                 
+ICON CROSS  46.52   150.87 8 -5 Chirpoi                       
+ICON CROSS  46.47   151.28 8 -5 Unnamed                       
+ICON CROSS  48.09   153.20 8 -5 Sarychev Peak                 
+ICON CROSS  48.98   153.48 8 -5 Chirinkotan                   
+ICON CROSS  48.95   153.93 8 -5 Ekarma                        
+ICON CROSS  50.32   155.45 8 -5 Chikurachki                   
+ICON CROSS  50.68   156.02 8 -5 Ebeko                         
+ICON CROSS  50.85   155.55 8 -5 Alaid                         
+ICON CROSS  51.57   157.32 8 -5 Zheltovsky                    
+ICON CROSS  52.45   158.19 8 -5 Mutnovsky                     
+ICON CROSS  52.55   158.03 8 -5 Gorely                        
+ICON CROSS  53.25   158.83 8 -5 Avachinsky                    
+ICON CROSS  53.98   159.45 8 -5 Akademia Nauk                 
+ICON CROSS  54.05   159.43 8 -5 Karymsky                      
+ICON CROSS  55.83   160.33 8 -5 Tolbachik                     
+ICON CROSS  55.97   160.58 8 -5 Bezymianny                    
+ICON CROSS  56.05   160.63 8 -5 Kliuchevskoi                  
+ICON CROSS  56.65   161.36 8 -5 Shiveluch                     
+ICON CROSS  52.10   177.60 8 -5 Kiska                         
+ICON CROSS  51.93   179.58 8 -5 Semisopochnoi                 
+ICON CROSS  51.79  -178.79 8 -5 Gareloi                       
+ICON CROSS  51.92  -177.16 8 -5 Kanaga                        
+ICON CROSS  52.07  -176.13 8 -5 Great Sitkin                  
+ICON CROSS  52.38  -174.15 8 -5 Atka                          
+ICON CROSS  52.31  -172.51 8 -5 Seguam                        
+ICON CROSS  52.50  -171.25 8 -5 Amukta                        
+ICON CROSS  52.82  -169.94 8 -5 Cleveland                     
+ICON CROSS  53.43  -168.13 8 -5 Okmok                         
+ICON CROSS  53.93  -168.03 8 -5 Bogoslof                      
+ICON CROSS  53.89  -166.92 8 -5 Makushin                      
+ICON CROSS  54.13  -165.98 8 -5 Akutan                        
+ICON CROSS  54.51  -164.65 8 -5 Westdahl                      
+ICON CROSS  54.75  -163.97 8 -5 Shishaldin                    
+ICON CROSS  55.42  -161.88 8 -5 Pavlof                        
+ICON CROSS  56.01  -159.79 8 -5 Kupreanof                     
+ICON CROSS  56.17  -159.38 8 -5 Veniaminof                    
+ICON CROSS  57.13  -156.99 8 -5 Chiginagak                    
+ICON CROSS  57.83  -156.51 8 -5 Ukinrek Maars                 
+ICON CROSS  58.23  -155.10 8 -5 Trident                       
+ICON CROSS  59.36  -153.43 8 -5 Augustine                     
+ICON CROSS  60.48  -152.74 8 -5 Redoubt                       
+ICON CROSS  61.29  -152.25 8 -5 Spurr                         
+ICON CROSS  46.20  -122.18 8 -5 St. Helens                    
+ICON CROSS  46.52  -129.58 8 -5 CoAxial Segment               
+ICON CROSS  45.95  -130.00 8 -5 Axial Seamount                
+ICON CROSS  44.83  -130.30 8 -5 Cleft Segment                 
+ICON CROSS  42.67  -126.78 8 -5 North Gorda Ridge             
+ICON CROSS  18.92  -155.27 8 -5 Loihi                         
+ICON CROSS  19.42  -155.29 8 -5 Kilauea                       
+ICON CROSS  19.47  -155.60 8 -5 Mauna Loa                     
+ICON CROSS   9.82  -104.30 8 -5 Unnamed                       
+ICON CROSS   0.79   -86.15 8 -5 Galapagos Rift                
+ICON CROSS -17.43  -113.20 8 -5 Unnamed                       
+ICON CROSS -28.98  -140.25 8 -5 Macdonald                     
+ICON CROSS  18.78  -110.95 8 -5 Socorro                       
+ICON CROSS  19.51  -103.62 8 -5 Colima                        
+ICON CROSS  19.02   -98.62 8 -5 Popocatepetl                  
+ICON CROSS  17.36   -93.22 8 -5 Chichon, El                   
+ICON CROSS  15.13   -92.11 8 -5 Tacana                        
+ICON CROSS  14.75   -91.55 8 -5 Santa Maria                   
+ICON CROSS  14.50   -90.87 8 -5 Acatenango                    
+ICON CROSS  14.47   -90.88 8 -5 Fuego                         
+ICON CROSS  14.38   -90.60 8 -5 Pacaya                        
+ICON CROSS  13.81   -89.63 8 -5 Izalco                        
+ICON CROSS  13.43   -88.26 8 -5 San Miguel                    
+ICON CROSS  12.70   -87.00 8 -5 San Cristobal                 
+ICON CROSS  12.60   -86.84 8 -5 Telica                        
+ICON CROSS  12.50   -86.70 8 -5 Negro, Cerro                  
+ICON CROSS  11.98   -86.16 8 -5 Masaya                        
+ICON CROSS  11.53   -85.62 8 -5 Concepcion                    
+ICON CROSS  10.83   -85.32 8 -5 Rincon de la Vieja            
+ICON CROSS  10.46   -84.70 8 -5 Arenal                        
+ICON CROSS  10.20   -84.23 8 -5 Poas                          
+ICON CROSS   9.97   -83.85 8 -5 Irazu                         
+ICON CROSS   4.89   -75.32 8 -5 Ruiz, Nevado del              
+ICON CROSS   2.32   -76.40 8 -5 Purace                        
+ICON CROSS   1.22   -77.37 8 -5 Galeras                       
+ICON CROSS  -0.07   -77.65 8 -5 Reventador                    
+ICON CROSS  -0.17   -78.59 8 -5 Guagua Pichincha              
+ICON CROSS  -1.46   -78.44 8 -5 Tungurahua                    
+ICON CROSS  -2.03   -78.33 8 -5 Sangay                        
+ICON CROSS  -0.37   -91.55 8 -5 Fernandina                    
+ICON CROSS   0.02   -91.35 8 -5 Wolf                          
+ICON CROSS  -0.43   -91.12 8 -5 Alcedo                        
+ICON CROSS  -0.83   -91.17 8 -5 Negra, Sierra                 
+ICON CROSS  -0.90   -91.42 8 -5 Azul, Cerro                   
+ICON CROSS   0.33   -90.47 8 -5 Marchena                      
+ICON CROSS -15.78   -71.85 8 -5 Sabancaya                     
+ICON CROSS -16.35   -70.90 8 -5 Ubinas                        
+ICON CROSS -20.73   -68.55 8 -5 Irruputuncu                   
+ICON CROSS -22.57   -67.87 8 -5 Putana                        
+ICON CROSS -23.37   -67.73 8 -5 Lascar                        
+ICON CROSS -24.27   -67.77 8 -5 Aracar                        
+ICON CROSS -33.40   -69.80 8 -5 Tupungatito                   
+ICON CROSS -35.24   -70.57 8 -5 Planchon-Peteroa              
+ICON CROSS -35.65   -70.76 8 -5 Azul, Cerro                   
+ICON CROSS -36.86   -71.37 8 -5 Chillan, Nevados de           
+ICON CROSS -37.85   -71.17 8 -5 Copahue                       
+ICON CROSS -37.92   -71.45 8 -5 Callaqui                      
+ICON CROSS -38.37   -71.58 8 -5 Lonquimay                     
+ICON CROSS -38.69   -71.72 8 -5 Llaima                        
+ICON CROSS -39.42   -71.93 8 -5 Villarrica                    
+ICON CROSS -40.35   -72.07 8 -5 Carran-Los Venados            
+ICON CROSS -45.90   -72.97 8 -5 Hudson, Cerro                 
+ICON CROSS -49.35   -73.28 8 -5 Viedma, Volcan                
+ICON CROSS  16.72   -62.18 8 -5 Soufriere Hills               
+ICON CROSS  16.05   -61.67 8 -5 Soufriere Guadeloupe          
+ICON CROSS  15.30   -61.32 8 -5 Watt, Morne                   
+ICON CROSS  13.33   -61.18 8 -5 Soufriere St. Vincent         
+ICON CROSS  12.30   -61.64 8 -5 Kick-'em-Jenny                
+ICON CROSS  63.67   -23.33 8 -5 Reykjaneshryggur              
+ICON CROSS  63.43   -20.28 8 -5 Vestmannaeyjar                
+ICON CROSS  63.98   -19.70 8 -5 Hekla                         
+ICON CROSS  64.42   -17.33 8 -5 Grimsvotn                     
+ICON CROSS  64.65   -16.72 8 -5 Kverkfjoll                    
+ICON CROSS  65.73   -16.78 8 -5 Krafla                        
+ICON CROSS  71.08    -8.17 8 -5 Jan Mayen                     
+ICON CROSS  85.58    85.00 8 -5 Unnamed                       
+ICON CROSS  38.73   -27.32 8 -5 Terceira                      
+ICON CROSS  28.57   -17.83 8 -5 La Palma                      
+ICON CROSS  14.95   -24.35 8 -5 Fogo                          
+ICON CROSS -77.53   167.17 8 -5 Erebus                        
+ICON CROSS -62.97   -60.65 8 -5 Deception Island              
+ICON CROSS -59.45   -27.37 8 -5 Thule Islands                 
+ICON CROSS -57.78   -26.45 8 -5 Michael                       

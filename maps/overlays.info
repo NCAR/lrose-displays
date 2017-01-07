@@ -1,0 +1,40 @@
+# OVERLAY.INFO : Information about Map overlays required for the AWPG Display
+#
+#  MAP_CODE Must be less than 16 characters, Color must be regualr X color name
+#
+# MAP_CODE        Control_Label         Map_File_Name            On/OFF Detail_Thresh Color     
+#------------------------------------------------------------------------------------------
+#
+SNOWGAUGES        SNOWGAUGES            /tools/rap/maps/snow_gauges.map      1	1.0     white
+STAPLETON         Stapleton_simple      /tools/rap/maps/stapleton.map        1	1.0     red
+SIA_RUNW          SIA_runways           /tools/rap/maps/SIA_runways.map      1	1.0     yellow
+SIA_TAXI          SIA_taxiways          /tools/rap/maps/SIA_taxiways.map     1	1.0     gold
+SIA_CONC          SIA_concourse         /tools/rap/maps/SIA_concourse.map    1	1.0     blue
+HIGH_SEC          DEN_High_Sectors      /tools/rap/maps/high_sectors.map     0	1.0     green
+LOW_SEC           DEN_Low_Sectors       /tools/rap/maps/low_sectors.map      0	1.0     green
+AIRPORTS          Airports              /tools/rap/maps/labeled.airports.map 0	1.0     gold
+VORTACS           Vortacs               /tools/rap/maps/labeled.vortacs.map  0	1.0     orange
+#FIXES             Fixes                 /tools/rap/maps/fixes.map            0	1.0     blue
+#JET_AIR           Jet_Airways           /tools/rap/maps/jet_airways.map      0	1.0     white
+#ARTCC_SEC         ARTCC_Sectors         /tools/rap/maps/artcc_sec.map        0	1.0     white
+RADARS            NWS_RADARS            /tools/rap/maps/radars.map           0	1.0     red
+#
+CP4-CHL-NEX       CP4-CHL-NEX_lobes     /tools/rap/maps/CP4-Chill-Nexrad_lobes.map 0      orange
+MHR-CP2_lobes     MHR-CP2_lobes         /tools/rap/maps/MHR-CP2_lobes.map    0	1.0     orange
+#
+#N_AMERICA         N_America             /tools/rap/maps/NW_Continents.map    1     1.0     white
+#COUNTIES          US_Counties           /tools/rap/maps/us_counties.map      0     1.0     white
+#STATES            State_Borders         /tools/rap/maps/usa.map              1	1.0     white
+Colo_roadmap_A    Colo_roadmap_A        /tools/rap/maps/Colo_roadmap_A.map   0	1.0     white
+Colo_counties     Colo_counties         /tools/rap/maps/Colo_counties.map    0	1.0     blue
+#
+#SAO_MID_ATL       SAO_MID_ATL           /tools/rap/maps/mid_atlantic_sao.map 0     1.0     blue
+#SAO_N_EAST        SAO_N_EAST            /tools/rap/maps/n_east_sao.map       0     1.0     blue
+#SAO_S_EAST        SAO_S_EAST            /tools/rap/maps/s_east_sao.map       0     1.0     blue
+#SAO_MID_WEST      SAO_MID_WEST          /tools/rap/maps/mid_west_sao.map     0     1.0     blue
+#SAO_MOUNTAIN      SAO_MOUNTAIN          /tools/rap/maps/mountain_sao.map     0     1.0     blue
+#SAO_N_CENTRAL     SAO_N_CENTRAL         /tools/rap/maps/n_central_sao.map    0     1.0     blue
+#SAO_S_CENTRAL     SAO_S_CENTRAL         /tools/rap/maps/s_central_sao.map    0     1.0     blue
+#SAO_CANADA        SAO_CANADA            /tools/rap/maps/canada_sao.map       0     1.0     blue
+#SAO_PACIFIC       SAO_PACIFIC           /tools/rap/maps/pacific_sao.map      0     1.0     blue
+#SAO_AK_AND_HI     SAO_AK_AND_HI         /tools/rap/maps/ak_and_hi_sao.map    0     1.0     blue

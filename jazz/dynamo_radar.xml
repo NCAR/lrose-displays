@@ -1,0 +1,1197 @@
+<?xml version="1.0"?>
+
+<!--
+####################################################################################################################################
+
+ Jazz file for SPOL at DYNAMO
+
+ Direct comments to:
+ Nancy Rehak (rehak@ucar.edu)
+
+####################################################################################################################################
+-->
+
+<Jazz version="1.0">
+
+<!--
+####################################################################################################################################
+
+ XML Tips:
+
+ - XML is comprised of Elements and Attributes, as shown below:
+
+   <Element attribute="value">
+     <ChildElement1/>
+     <ChildElement2 attribute1="foo" anotherAttribute="bar"/>
+   </Element>
+
+ - Do NOT use ampersand, apostrophe, greater-than, less-than, dashes, or exclamation characters for your content!
+   These are special XML characters.
+ - Element names begin with a capital letter, attribute names with a lowercase.
+ - Elements must be terminated with a slash, either inline such as "<Element/>" or with a matching tag such as "<Element></Element>"
+ - Attribute values must always be double quoted
+ - Comments are bounded by less-than, exclamation, and 2 dashes at the beginning and 2 dashes followed by a greater-than at the end.
+   2 dashes (and thus comments) cannot appear anywhere within a comment (which is why I can't show them to you here).
+ - Blank lines, whitespace, carriage returns, and comments are completely ignored by the parser.
+
+ Jazz Tips:
+
+ - Configuration elements contain attributes which have meaning to that element (see descriptions of each below).
+ - Most configuration elements can be specified on a single line, but you are free to split them on several lines for readability.
+ - Some elements may appear more than once in a file (e.g., "Layer," "Colorscale," and "Area"). Others should only appear once.
+   The comment for each element will indicate whether that element can be repeated.
+ - Some attributes may be left out or their values left empty. In those cases, the default value for that attribute applies.
+   These are all indicated in the comments.
+
+####################################################################################################################################
+-->
+
+<!--
+####################################################################################################################################
+
+ <Layer> element (optional, any number of these allowed).
+
+ Required attributes:
+
+ vis        = whether the layer should be on or off when the application starts
+ type       = the datatype of this layer (e.g., MDV, MDVWIND, MDVTOPO, CIDDMAP, SYMPROD)
+              This determines which other configuration options, below, are valid
+ name       = the name shown in the display
+
+
+ Optional attributes:
+
+ menuGroup        = the name of a group to add this layer to, defining where the layer shows up in the menus. By default
+                    layers are added to a default group based on their type (example: MDV layers are added to GRIDS_MENU).
+                    Specifying a different membership or menuGroup="none" overrides the default behavior.
+ visibilityGroups = the name of a group that will control the visibility of the layer. By default layers may be added to
+                    a group based on their type (example: MDV layers are added to the exclusive GRIDS_VISIBILITY group
+                    that maintains a maximum of one visible layer within the group).  Layers are not required to be in a
+                    visibility group.
+
+ Notes:
+  - Layers are rendered in the same order in which they are defined. First layer is on bottom, last layer on top. However,
+    the GUI allows you to change the order by selecting "Configure -> Layer Order" from the menubar.
+
+
+ Layer Descriptions:
+
+   MDV:
+     This is the layer type to use for any MDV grids that don't fall under a more specific category below.
+
+     Attributes:
+       field      = the MDV field name to retrieve (required)
+       is2D       = true or false (default); if 2D = true, then altitude changes do not cause a reloading of data
+       render     = rendering scheme which may be: grid, fillcontours, linecontours, or none (required)
+       colorscale = the colorscale to use. May be the name of a colorscale defined in this file
+                    or a reference to a remote CIDD (*.colors) or JADE (*.xml) colorscale. (required)
+       location   = must be in the form "mdvp::". Mdv files are NOT supported (yet). (required)
+
+     Default menu group is GRIDS_MENU, default visibility group is GRIDS_EXCLUSIVE.
+
+
+   MDVTOPO:
+     This is the layer type to use for MDV topography grids.
+
+     Attributes:
+       field      = the short MDV field name to retrieve (required)
+       colorscale = the colorscale to use. May be the name of a colorscale defined in this file or a reference to a
+                    remote CIDD ("*.colors") or JADE ("*.xml") colorscale (required)
+       location   = must be in the form "mdvp::". (required)
+
+     Default menu group is FEATURES_MENU.
+
+
+   MDVWIND:
+     This is the layer type to use for MDV wind grids that are rendered as gridded layers.  This is not a wind/motion
+     overlay layer which will need to be added some time in the futurel.
+
+     Attributes:
+       isUandV    = true if the following fields will contain U and V vectors or false if speed and direction will be used (required)
+       field      = the short MDV field name containing either the U wind vector or the wind speed in knots, depending on the value of "isUandV" (required)
+       extraField = the short MDV field name containing the V wind vector or the wind direction in degrees, depending on the value of "isUandV" (required)
+       is2D       = true or false (default); if 2D = true, then altitude changes do not cause a reloading of data
+       render     = rendering scheme ("grid" for filled grid, "fillcontours" for color-filled contours, or "linecontours" for line contours) (required)
+       colorscale = the colorscale to use. May be the name of a colorscale defined in this file or a reference to a
+                    remote CIDD (*.colors) or JADE (*.xml) colorscale (required)
+       location   = must be in the form "mdvp::". (required)
+
+     Default menu group is GRIDS_MENU, default visibility group is GRIDS_EXCLUSIVE.
+
+
+   SYMPROD:
+     This is the layer type to use for SPDB data that is being rendered using a Symprod server.
+
+     Attributes:
+       before     = the amount of time before the currently selected time to look for products (e.g. "75mins" or "1hrs"). (required)
+       after      = the amount of time after the currently selected time to look for products (can be "" or "now" to indicate zero offset). (required)
+       textOff    = the spacing factor past which to stop rendering text labels.  Defaults to 0.0.
+       request    = the methodology to use for requesting the data ("closest", "interval", "latest", "valid" or "firstBefore"). (required)
+
+     Default menu group is FEATURES_MENU.
+
+
+   CIDDMAP:
+     This is the layer type to use for maps in the format used by CIDD and Rview.
+
+     Attributes:
+       color                  = the color with which to render the line, as an X11-defined color name, RGB triplet (each value between 0..255)
+                                or hex group ("wheat1", "153,153,153", "#ffffcc"). Defaults to black.
+       width                  = the width of the line in pixels. Defaults to 1.
+
+     Default menu group is MAPS_MENU.
+
+
+   RANGE_RINGS:
+     This layer type creates an overlay of range rings.  The range rings may be centered on a predefined location or may be centered on
+     the origin of the underlying base MDV data layer.  This layer is most useful if the base MDV layer is radar data in a polar or flat
+     projection.
+
+     Attributes:
+       followData             = flag indicating whether the range rings should follow the data origin.
+                                If true, the rings will be centered on the projection origin for the underlying base gridded data field.
+                                Note that the range rings will not be displayed if the origin of the data is set to 0.0, 0.0 (which is
+                                the case for most lat/lon projections).
+                                If false, the rings will always be rendered centered on radarLat, radarLon.
+                                Defaults to false.
+       radarLat               = the latitude of the radar. Defaults to 0.0.
+       radarLon               = the longitude of the radar. Defaults to 0.0.
+       color                  = the color with which to render the line, as an X11-defined color name, RGB triplet (each value between 0..255)
+                                or hex group ("wheat1", "153,153,153", "#ffffcc") (required).
+       width                  = the width of the lines in pixels.  Defaults to 1.
+       radiusIncr             = the radius increment of the rings in kilometers.  Rings will be rendered at all integral multiples of this
+                                value.  Defaults to 100.
+       numRings               = number of rings to render.  Defaults to 4.
+       displayAzLines         = flag indicating whether to display azimuth lines ("true" or "false", defaults to false)
+       startAz                = the azimuth for the first azimuth line in degrees.  This is also the line along which the range labels will be
+                                rendered.  Defaults to 45.0.
+       numAzLines             = the number of azimuth lines to display.  Defaults to 8.
+
+     Default menu group is MAPS_MENU.
+
+####################################################################################################################################
+-->
+
+<!-- MDV Layers -->
+
+<!--       colorscale="http://rap.ucar.edu/colorscales/dbz.colors" menuGroup="s_band_moments_sur" /> -->
+
+<Layer vis="on" type="MDV" name="DBZ F" location="mdvp:://ncar-spol.dyndns.org:0:cfradial/moments/sband/sur"
+       field="DBZ_F" render="grid" colorscale="http://rap.ucar.edu/colorscales/dbz.colors"
+       menuGroup="s_band_filtered" />
+
+<Layer vis="off" type="MDV" name="DBZ" location="mdvp:://ncar-spol.dyndns.org:0:cfradial/moments/sband/sur"
+       field="DBZ" render="grid" colorscale="http://rap.ucar.edu/colorscales/dbz.colors"
+       menuGroup="s_band_raw" />
+
+<Layer vis="off" type="MDV" name="VEL F" location="mdvp:://ncar-spol.dyndns.org:0:cfradial/moments/sband/sur"
+       field="VEL_F" render="grid" colorscale="http://rap.ucar.edu/colorscales/vel.colors"
+       menuGroup="s_band_filtered" />
+
+<Layer vis="off" type="MDV" name="VEL" location="mdvp:://ncar-spol.dyndns.org:0:cfradial/moments/sband/sur"
+       field="VEL" render="grid" colorscale="http://rap.ucar.edu/colorscales/vel.colors"
+       menuGroup="s_band_raw" />
+
+<Layer vis="off" type="MDV" name="WIDTH F" location="mdvp:://ncar-spol.dyndns.org:0:cfradial/moments/sband/sur"
+       field="WIDTH_F" render="grid" colorscale="http://rap.ucar.edu/colorscales/width.colors"
+       menuGroup="s_band_filtered" />
+
+<Layer vis="off" type="MDV" name="WIDTH" location="mdvp:://ncar-spol.dyndns.org:0:cfradial/moments/sband/sur"
+       field="WIDTH" render="grid" colorscale="http://rap.ucar.edu/colorscales/width.colors"
+       menuGroup="s_band_raw" />
+
+<Layer vis="off" type="MDV" name="ZDRM F" location="mdvp:://ncar-spol.dyndns.org:0:cfradial/moments/sband/sur"
+       field="ZDRM_F" render="grid" colorscale="http://rap.ucar.edu/colorscales/zdr.colors"
+       menuGroup="s_band_filtered" />
+
+<Layer vis="off" type="MDV" name="ZDRM" location="mdvp:://ncar-spol.dyndns.org:0:cfradial/moments/sband/sur"
+       field="ZDRM" render="grid" colorscale="http://rap.ucar.edu/colorscales/zdr.colors"
+       menuGroup="s_band_raw" />
+
+<Layer vis="off" type="MDV" name="ZDR F" location="mdvp:://ncar-spol.dyndns.org:0:cfradial/moments/sband/sur"
+       field="ZDR_F" render="grid" colorscale="http://rap.ucar.edu/colorscales/zdr.colors"
+       menuGroup="s_band_filtered" />
+
+<Layer vis="off" type="MDV" name="ZDR" location="mdvp:://ncar-spol.dyndns.org:0:cfradial/moments/sband/sur"
+       field="ZDR" render="grid" colorscale="http://rap.ucar.edu/colorscales/zdr.colors"
+       menuGroup="s_band_raw" />
+
+<Layer vis="off" type="MDV" name="LDRH F" location="mdvp:://ncar-spol.dyndns.org:0:cfradial/moments/sband/sur"
+       field="LDRH_F" render="grid" colorscale="http://rap.ucar.edu/colorscales/ldr.colors"
+       menuGroup="s_band_filtered" />
+
+<Layer vis="off" type="MDV" name="LDRH" location="mdvp:://ncar-spol.dyndns.org:0:cfradial/moments/sband/sur"
+       field="LDRH" render="grid" colorscale="http://rap.ucar.edu/colorscales/ldr.colors"
+       menuGroup="s_band_raw" />
+
+<Layer vis="off" type="MDV" name="LDRV F" location="mdvp:://ncar-spol.dyndns.org:0:cfradial/moments/sband/sur"
+       field="LDRV_F" render="grid" colorscale="http://rap.ucar.edu/colorscales/ldr.colors"
+       menuGroup="s_band_filtered" />
+
+<Layer vis="off" type="MDV" name="LDRV" location="mdvp:://ncar-spol.dyndns.org:0:cfradial/moments/sband/sur"
+       field="LDRV" render="grid" colorscale="http://rap.ucar.edu/colorscales/ldr.colors"
+       menuGroup="s_band_raw" />
+
+<Layer vis="off" type="MDV" name="PHIDP F" location="mdvp:://ncar-spol.dyndns.org:0:cfradial/moments/sband/sur"
+       field="PHIDP_F" render="grid" colorscale="http://rap.ucar.edu/colorscales/phidp.colors"
+       menuGroup="s_band_filtered" />
+
+<Layer vis="off" type="MDV" name="PHIDP" location="mdvp:://ncar-spol.dyndns.org:0:cfradial/moments/sband/sur"
+       field="PHIDP" render="grid" colorscale="http://rap.ucar.edu/colorscales/phidp.colors"
+       menuGroup="s_band_raw" />
+
+<Layer vis="off" type="MDV" name="RHOHV F" location="mdvp:://ncar-spol.dyndns.org:0:cfradial/moments/sband/sur"
+       field="RHOHV_F" render="grid" colorscale="http://rap.ucar.edu/colorscales/rhohv.colors"
+       menuGroup="s_band_filtered" />
+
+<Layer vis="off" type="MDV" name="RHOHV" location="mdvp:://ncar-spol.dyndns.org:0:cfradial/moments/sband/sur"
+       field="RHOHV" render="grid" colorscale="http://rap.ucar.edu/colorscales/rhohv.colors"
+       menuGroup="s_band_raw" />
+
+<Layer vis="off" type="MDV" name="KDP F" location="mdvp:://ncar-spol.dyndns.org:0:cfradial/moments/sband/sur"
+       field="KDP_F" render="grid" colorscale="http://rap.ucar.edu/colorscales/kdp_sband.colors"
+       menuGroup="s_band_filtered" />
+
+<Layer vis="off" type="MDV" name="KDP" location="mdvp:://ncar-spol.dyndns.org:0:cfradial/moments/sband/sur"
+       field="KDP" render="grid" colorscale="http://rap.ucar.edu/colorscales/kdp_sband.colors"
+       menuGroup="s_band_raw" />
+
+
+<Layer vis="off" type="MDV" name="SNRHC F" location="mdvp:://ncar-spol.dyndns.org:0:cfradial/moments/sband/sur"
+       field="SNRHC_F" render="grid" colorscale="http://rap.ucar.edu/colorscales/snr.colors"
+       menuGroup="s_band_filtered" />
+
+<Layer vis="off" type="MDV" name="SNRHC" location="mdvp:://ncar-spol.dyndns.org:0:cfradial/moments/sband/sur"
+       field="SNRHC" render="grid" colorscale="http://rap.ucar.edu/colorscales/snr.colors"
+       menuGroup="s_band_raw" />
+
+<Layer vis="off" type="MDV" name="SNRVC F" location="mdvp:://ncar-spol.dyndns.org:0:cfradial/moments/sband/sur"
+       field="SNRVC_F" render="grid" colorscale="http://rap.ucar.edu/colorscales/snr.colors"
+       menuGroup="s_band_filtered" />
+
+<Layer vis="off" type="MDV" name="SNRVC" location="mdvp:://ncar-spol.dyndns.org:0:cfradial/moments/sband/sur"
+       field="SNRVC" render="grid" colorscale="http://rap.ucar.edu/colorscales/snr.colors"
+       menuGroup="s_band_raw" />
+
+<Layer vis="off" type="MDV" name="SNRHX F" location="mdvp:://ncar-spol.dyndns.org:0:cfradial/moments/sband/sur"
+       field="SNRHX_F" render="grid" colorscale="http://rap.ucar.edu/colorscales/snr.colors"
+       menuGroup="s_band_filtered" />
+
+<Layer vis="off" type="MDV" name="SNRHX" location="mdvp:://ncar-spol.dyndns.org:0:cfradial/moments/sband/sur"
+       field="SNRHX" render="grid" colorscale="http://rap.ucar.edu/colorscales/snr.colors"
+       menuGroup="s_band_raw" />
+
+<Layer vis="off" type="MDV" name="SNRVX F" location="mdvp:://ncar-spol.dyndns.org:0:cfradial/moments/sband/sur"
+       field="SNRVX_F" render="grid" colorscale="http://rap.ucar.edu/colorscales/snr.colors"
+       menuGroup="s_band_filtered" />
+
+<Layer vis="off" type="MDV" name="SNRVX" location="mdvp:://ncar-spol.dyndns.org:0:cfradial/moments/sband/sur"
+       field="SNRVX" render="grid" colorscale="http://rap.ucar.edu/colorscales/snr.colors"
+       menuGroup="s_band_raw" />
+
+<Layer vis="off" type="MDV" name="DBMHC F" location="mdvp:://ncar-spol.dyndns.org::cfradial/moments/sband/sur"
+       field="DBMHC_F" render="grid" colorscale="http://rap.ucar.edu/colorscales/dbmlow.colors"
+       menuGroup="s_band_filtered" />
+
+<Layer vis="off" type="MDV" name="DBMHC" location="mdvp:://ncar-spol.dyndns.org::cfradial/moments/sband/sur"
+       field="DBMHC" render="grid" colorscale="http://rap.ucar.edu/colorscales/dbmlow.colors"
+       menuGroup="s_band_raw" />
+
+<Layer vis="off" type="MDV" name="DBMVC F" location="mdvp:://ncar-spol.dyndns.org::cfradial/moments/sband/sur"
+       field="DBMVC_F" render="grid" colorscale="http://rap.ucar.edu/colorscales/dbmlow.colors"
+       menuGroup="s_band_filtered" />
+
+<Layer vis="off" type="MDV" name="DBMVC" location="mdvp:://ncar-spol.dyndns.org::cfradial/moments/sband/sur"
+       field="DBMVC" render="grid" colorscale="http://rap.ucar.edu/colorscales/dbmlow.colors"
+       menuGroup="s_band_raw" />
+
+<Layer vis="off" type="MDV" name="DBMHX F" location="mdvp:://ncar-spol.dyndns.org::cfradial/moments/sband/sur"
+       field="DBMHX_F" render="grid" colorscale="http://rap.ucar.edu/colorscales/dbmlow.colors"
+       menuGroup="s_band_filtered" />
+
+<Layer vis="off" type="MDV" name="DBMHX" location="mdvp:://ncar-spol.dyndns.org::cfradial/moments/sband/sur"
+       field="DBMHX" render="grid" colorscale="http://rap.ucar.edu/colorscales/dbmlow.colors"
+       menuGroup="s_band_raw" />
+
+<Layer vis="off" type="MDV" name="DBMVX F" location="mdvp:://ncar-spol.dyndns.org::cfradial/moments/sband/sur"
+       field="DBMVX_F" render="grid" colorscale="http://rap.ucar.edu/colorscales/dbmlow.colors"
+       menuGroup="s_band_filtered" />
+
+<Layer vis="off" type="MDV" name="DBMVX" location="mdvp:://ncar-spol.dyndns.org::cfradial/moments/sband/sur"
+       field="DBMVX" render="grid" colorscale="http://rap.ucar.edu/colorscales/dbmlow.colors"
+       menuGroup="s_band_raw" />
+
+<Layer vis="off" type="MDV" name="CPA" location="mdvp:://ncar-spol.dyndns.org::cfradial/moments/sband/sur"
+       field="CPA" render="grid" colorscale="http://rap.ucar.edu/colorscales/fraction.colors"
+       menuGroup="s_band_raw" />
+
+<Layer vis="off" type="MDV" name="NCP" location="mdvp:://ncar-spol.dyndns.org::cfradial/moments/sband/sur"
+       field="NCP" render="grid" colorscale="http://rap.ucar.edu/colorscales/fraction.colors"
+       menuGroup="s_band_raw" />
+
+<Layer vis="off" type="MDV" name="CMD" location="mdvp:://ncar-spol.dyndns.org::cfradial/moments/sband/sur"
+       field="CMD" render="grid" colorscale="http://rap.ucar.edu/colorscales/cmd.colors"
+       menuGroup="s_band_raw" />
+
+<Layer vis="off" type="MDV" name="CMD FLAG" location="mdvp:://ncar-spol.dyndns.org::cfradial/moments/sband/sur"
+       field="CMD_FLAG" render="grid" colorscale="http://rap.ucar.edu/colorscales/cmd_flag.colors"
+       menuGroup="s_band_raw" />
+
+
+<Layer vis="off" type="MDV" name="PID" location="mdvp:://ncar-spol.dyndns.org:0:cfradial/partrain/sband/sur"
+       field="PID" render="grid" colorscale="http://rap.ucar.edu/colorscales/pid.colors"
+       menuGroup="pid_rainrate" />
+
+<Layer vis="off" type="MDV" name="PID MDV" location="mdvp:://ncar-spol.dyndns.org:0:mdv/radial/partrain/sband/sur"
+       field="PID" render="grid" colorscale="http://rap.ucar.edu/colorscales/pid.colors"
+       menuGroup="pid_rainrate" />
+
+<Layer vis="off" type="MDV" name="TEMP FOR PID" location="mdvp:://ncar-spol.dyndns.org:0:cfradial/partrain/sband/sur"
+       field="TEMP_FOR_PID" render="grid" colorscale="http://rap.ucar.edu/colorscales/temp.colors"
+       menuGroup="pid_rainrate" />
+
+<Layer vis="off" type="MDV" name="RATE ZH" location="mdvp:://ncar-spol.dyndns.org:0:cfradial/partrain/sband/sur"
+       field="RATE_ZH" render="grid" colorscale="http://rap.ucar.edu/colorscales/precip.colors"
+       menuGroup="pid_rainrate" />
+
+<Layer vis="off" type="MDV" name="RATE Z ZDR" location="mdvp:://ncar-spol.dyndns.org:0:cfradial/partrain/sband/sur"
+       field="RATE_Z_ZDR" render="grid" colorscale="http://rap.ucar.edu/colorscales/precip.colors"
+       menuGroup="pid_rainrate" />
+
+<Layer vis="off" type="MDV" name="RATE KDP" location="mdvp:://ncar-spol.dyndns.org:0:cfradial/partrain/sband/sur"
+       field="RATE_KDP" render="grid" colorscale="http://rap.ucar.edu/colorscales/precip.colors"
+       menuGroup="pid_rainrate" />
+
+<Layer vis="off" type="MDV" name="RATE KDP ZDR" location="mdvp:://ncar-spol.dyndns.org:0:cfradial/partrain/sband/sur"
+       field="RATE_KDP_ZDR" render="grid" colorscale="http://rap.ucar.edu/colorscales/precip.colors"
+       menuGroup="pid_rainrate" />
+
+<Layer vis="off" type="MDV" name="RATE HYBRID" location="mdvp:://ncar-spol.dyndns.org:0:cfradial/partrain/sband/sur"
+       field="RATE_HYBRID" render="grid" colorscale="http://rap.ucar.edu/colorscales/precip.colors"
+       menuGroup="pid_rainrate" />
+
+
+<Layer vis="off" type="MDV" name="DBZ K" location="mdvp:://ncar-spol.dyndns.org:0:cfradial/moments/kband/sur"
+       field="DBZ" render="grid" colorscale="http://rap.ucar.edu/colorscales/dbz.colors"
+       menuGroup="k_band_raw" />
+
+<Layer vis="off" type="MDV" name="VEL K" location="mdvp:://ncar-spol.dyndns.org:0:cfradial/moments/kband/sur"
+       field="VEL" render="grid" colorscale="http://rap.ucar.edu/colorscales/vel_k.colors"
+       menuGroup="k_band_raw" />
+
+<Layer vis="off" type="MDV" name="WIDTH K" location="mdvp:://ncar-spol.dyndns.org:0:cfradial/moments/kband/sur"
+       field="WIDTH" render="grid" colorscale="http://rap.ucar.edu/colorscales/width_k.colors"
+       menuGroup="k_band_raw" />
+
+<Layer vis="off" type="MDV" name="LDRH K" location="mdvp:://ncar-spol.dyndns.org:0:cfradial/moments/kband/sur"
+       field="LDRH" render="grid" colorscale="http://rap.ucar.edu/colorscales/ldr.colors"
+       menuGroup="k_band_raw" />
+
+<Layer vis="off" type="MDV" name="SNRHC K" location="mdvp:://ncar-spol.dyndns.org:0:cfradial/moments/kband/sur"
+       field="SNRHC" render="grid" colorscale="http://rap.ucar.edu/colorscales/snr.colors"
+       menuGroup="k_band_raw" />
+
+<Layer vis="off" type="MDV" name="SNRVX K" location="mdvp:://ncar-spol.dyndns.org:0:cfradial/moments/kband/sur"
+       field="SNRVX" render="grid" colorscale="http://rap.ucar.edu/colorscales/snr.colors"
+       menuGroup="k_band_raw" />
+
+<Layer vis="off" type="MDV" name="DBMHC K" location="mdvp:://ncar-spol.dyndns.org::cfradial/moments/kband/sur"
+       field="DBMHC" render="grid" colorscale="http://rap.ucar.edu/colorscales/dbmlow.colors"
+       menuGroup="k_band_raw" />
+
+<Layer vis="off" type="MDV" name="DBMVX K" location="mdvp:://ncar-spol.dyndns.org::cfradial/moments/kband/sur"
+       field="DBMVX" render="grid" colorscale="http://rap.ucar.edu/colorscales/dbmlow.colors"
+       menuGroup="k_band_raw" />
+
+<Layer vis="off" type="MDV" name="CPA K" location="mdvp:://ncar-spol.dyndns.org::cfradial/moments/kband/sur"
+       field="CPA" render="grid" colorscale="http://rap.ucar.edu/colorscales/fraction.colors"
+       menuGroup="k_band_raw" />
+
+<Layer vis="off" type="MDV" name="NCP K" location="mdvp:://ncar-spol.dyndns.org::cfradial/moments/kband/sur"
+       field="NCP" render="grid" colorscale="http://rap.ucar.edu/colorscales/fraction.colors"
+       menuGroup="k_band_raw" />
+
+<Layer vis="off" type="MDV" name="DBZ S K DIFF" location="mdvp:://ncar-spol.dyndns.org:0:mdv/radial/repoh/rh/sur"
+       field="dbz_diff" render="grid" colorscale="http://rap.ucar.edu/colorscales/dbz.colors"
+       menuGroup="k_band_raw" />
+
+
+<Layer vis="off" type="MDV" name="DBZ SMARTR" location="mdvp:://ncar-spol.dyndns.org:0:cfradial/moments/smartr/sur"
+       field="DBZ" render="grid" colorscale="http://rap.ucar.edu/colorscales/dbz.colors"
+       menuGroup="smartr" />
+
+<Layer vis="off" type="MDV" name="VEL SMARTR" location="mdvp:://ncar-spol.dyndns.org:0:cfradial/moments/smartr/sur"
+       field="VEL" render="grid" colorscale="http://rap.ucar.edu/colorscales/vel.colors"
+       menuGroup="smartr" />
+
+<Layer vis="off" type="MDV" name="WIDTH SMARTR" location="mdvp:://ncar-spol.dyndns.org:0:cfradial/moments/smartr/sur"
+       field="WIDTH" render="grid" colorscale="http://rap.ucar.edu/colorscales/width_k.colors"
+       menuGroup="smartr" />
+
+<Layer vis="off" type="MDV" name="DBZTOT SMARTR" location="mdvp:://ncar-spol.dyndns.org:0:cfradial/moments/smartr/sur"
+       field="DBZ_TOT" render="grid" colorscale="http://rap.ucar.edu/colorscales/dbz.colors"
+       menuGroup="smartr" />
+
+<Layer vis="off" type="MDV" name="DBZ SMARTR CART" location="mdvp:://ncar-spol.dyndns.org:0:mdv/cart/moments/smartr/sur"
+       field="DBZ" render="grid" colorscale="http://rap.ucar.edu/colorscales/dbz.colors"
+       menuGroup="smartr" />
+
+<Layer vis="off" type="MDV" name="VEL SMARTR CART" location="mdvp:://ncar-spol.dyndns.org:0:mdv/cart/moments/smartr/sur"
+       field="VEL" render="grid" colorscale="http://rap.ucar.edu/colorscales/vel.colors"
+       menuGroup="smartr" />
+
+<Layer vis="off" type="MDV" name="WIDTH SMARTR CART" location="mdvp:://ncar-spol.dyndns.org:0:mdv/cart/moments/smartr/sur"
+       field="WIDTH" render="grid" colorscale="http://rap.ucar.edu/colorscales/width_k.colors"
+       menuGroup="smartr" />
+
+<Layer vis="off" type="MDV" name="DBZTOT SMARTR CART" location="mdvp:://ncar-spol.dyndns.org:0:mdv/cart/moments/smartr/sur"
+       field="DBZ_TOT" render="grid" colorscale="http://rap.ucar.edu/colorscales/dbz.colors"
+       menuGroup="smartr" />
+
+
+
+<Layer vis="off" type="MDV" name="REPOH HUMIDITY" location="mdvp:://ncar-spol.dyndns.org:0:mdv/radial/repoh/rh/sur"
+       field="humidity" render="grid" colorscale="http://rap.ucar.edu/colorscales/repoh_humidity.colors"
+       menuGroup="repoh" />
+
+<Layer vis="off" type="MDV" name="REPOH atten" location="mdvp:://ncar-spol.dyndns.org:0:mdv/radial/repoh/rh/sur"
+       field="attenuation" render="grid" colorscale="http://rap.ucar.edu/colorscales/repoh_attenuation.colors"
+       menuGroup="repoh" />
+
+<Layer vis="off" type="MDV" name="REPOH DBZ K" location="mdvp:://ncar-spol.dyndns.org:0:mdv/radial/repoh/kband/sur"
+       field="DBZ" render="grid" colorscale="http://rap.ucar.edu/colorscales/dbz.colors"
+       menuGroup="repoh" />
+
+<Layer vis="off" type="MDV" name="REPOH dbz diff" location="mdvp:://ncar-spol.dyndns.org:0:mdv/radial/repoh/rh/sur"
+       field="dbz_diff" render="grid" colorscale="http://rap.ucar.edu/colorscales/dbz.colors"
+       menuGroup="repoh" />
+
+
+<Layer vis="off" type="MDV" name="DBZ CART" location="mdvp:://ncar-spol.dyndns.org:0:mdv/cart/moments/sband/sur"
+       field="DBZ_F" render="grid" colorscale="http://rap.ucar.edu/colorscales/dbz.colors"
+       menuGroup="s_band_cart" />
+
+<Layer vis="off" type="MDV" name="VEL CART" location="mdvp:://ncar-spol.dyndns.org:0:mdv/cart/moments/sband/sur"
+       field="VEL_F" render="grid" colorscale="http://rap.ucar.edu/colorscales/vel.colors"
+       menuGroup="s_band_cart" />
+
+<Layer vis="off" type="MDV" name="WIDTH CART" location="mdvp:://ncar-spol.dyndns.org:0:mdv/cart/moments/sband/sur"
+       field="WIDTH_F" render="grid" colorscale="http://rap.ucar.edu/colorscales/width.colors"
+       menuGroup="s_band_cart" />
+
+<Layer vis="off" type="MDV" name="ZDRM CART" location="mdvp:://ncar-spol.dyndns.org:0:mdv/cart/moments/sband/sur"
+       field="ZDRM_F" render="grid" colorscale="http://rap.ucar.edu/colorscales/zdr.colors"
+       menuGroup="s_band_cart" />
+
+<Layer vis="off" type="MDV" name="ZDR CART" location="mdvp:://ncar-spol.dyndns.org:0:mdv/cart/moments/sband/sur"
+       field="ZDR_F" render="grid" colorscale="http://rap.ucar.edu/colorscales/zdr.colors"
+       menuGroup="s_band_cart" />
+
+<Layer vis="off" type="MDV" name="LDRH CART" location="mdvp:://ncar-spol.dyndns.org:0:mdv/cart/moments/sband/sur"
+       field="LDRH_F" render="grid" colorscale="http://rap.ucar.edu/colorscales/ldr.colors"
+       menuGroup="s_band_cart" />
+
+<Layer vis="off" type="MDV" name="LDRV CART" location="mdvp:://ncar-spol.dyndns.org:0:mdv/cart/moments/sband/sur"
+       field="LDRV_F" render="grid" colorscale="http://rap.ucar.edu/colorscales/ldr.colors"
+       menuGroup="s_band_cart" />
+
+<Layer vis="off" type="MDV" name="PHIDP CART" location="mdvp:://ncar-spol.dyndns.org:0:mdv/cart/moments/sband/sur"
+       field="PHIDP_F" render="grid" colorscale="http://rap.ucar.edu/colorscales/phidp.colors"
+       menuGroup="s_band_cart" />
+
+<Layer vis="off" type="MDV" name="RHOHV CART" location="mdvp:://ncar-spol.dyndns.org:0:mdv/cart/moments/sband/sur"
+       field="RHOHV_F" render="grid" colorscale="http://rap.ucar.edu/colorscales/rhohv.colors"
+       menuGroup="s_band_cart" />
+
+<Layer vis="off" type="MDV" name="KDP CART" location="mdvp:://ncar-spol.dyndns.org:0:mdv/cart/moments/sband/sur"
+       field="KDP_F" render="grid" colorscale="http://rap.ucar.edu/colorscales/kdp_sband.colors"
+       menuGroup="s_band_cart" />
+
+
+<Layer vis="off" type="MDV" name="DBZ CART RHI" location="mdvp:://ncar-spol.dyndns.org:0:mdv/cart/moments/sband/rhi"
+       field="DBZ_F" render="grid" colorscale="http://rap.ucar.edu/colorscales/dbz.colors"
+       menuGroup="s_band_cart" />
+
+<Layer vis="off" type="MDV" name="VEL CART RHI" location="mdvp:://ncar-spol.dyndns.org:0:mdv/cart/moments/sband/rhi"
+       field="VEL_F" render="grid" colorscale="http://rap.ucar.edu/colorscales/vel.colors"
+       menuGroup="s_band_cart" />
+
+<Layer vis="off" type="MDV" name="WIDTH CART RHI" location="mdvp:://ncar-spol.dyndns.org:0:mdv/cart/moments/sband/rhi"
+       field="WIDTH_F" render="grid" colorscale="http://rap.ucar.edu/colorscales/width.colors"
+       menuGroup="s_band_cart" />
+
+<Layer vis="off" type="MDV" name="ZDRM CART RHI" location="mdvp:://ncar-spol.dyndns.org:0:mdv/cart/moments/sband/rhi"
+       field="ZDRM_F" render="grid" colorscale="http://rap.ucar.edu/colorscales/zdr.colors"
+       menuGroup="s_band_cart" />
+
+<Layer vis="off" type="MDV" name="ZDR CART RHI" location="mdvp:://ncar-spol.dyndns.org:0:mdv/cart/moments/sband/rhi"
+       field="ZDR_F" render="grid" colorscale="http://rap.ucar.edu/colorscales/zdr.colors"
+       menuGroup="s_band_cart" />
+
+<Layer vis="off" type="MDV" name="LDRH CART RHI" location="mdvp:://ncar-spol.dyndns.org:0:mdv/cart/moments/sband/rhi"
+       field="LDRH_F" render="grid" colorscale="http://rap.ucar.edu/colorscales/ldr.colors"
+       menuGroup="s_band_cart" />
+
+<Layer vis="off" type="MDV" name="LDRV CART RHI" location="mdvp:://ncar-spol.dyndns.org:0:mdv/cart/moments/sband/rhi"
+       field="LDRV_F" render="grid" colorscale="http://rap.ucar.edu/colorscales/ldr.colors"
+       menuGroup="s_band_cart" />
+
+<Layer vis="off" type="MDV" name="PHIDP CART RHI" location="mdvp:://ncar-spol.dyndns.org:0:mdv/cart/moments/sband/rhi"
+       field="PHIDP_F" render="grid" colorscale="http://rap.ucar.edu/colorscales/phidp.colors"
+       menuGroup="s_band_cart" />
+
+<Layer vis="off" type="MDV" name="RHOHV CART RHI" location="mdvp:://ncar-spol.dyndns.org:0:mdv/cart/moments/sband/rhi"
+       field="RHOHV_F" render="grid" colorscale="http://rap.ucar.edu/colorscales/rhohv.colors"
+       menuGroup="s_band_cart" />
+
+<Layer vis="off" type="MDV" name="KDP CART RHI" location="mdvp:://ncar-spol.dyndns.org:0:mdv/cart/moments/sband/rhi"
+       field="KDP_F" render="grid" colorscale="http://rap.ucar.edu/colorscales/kdp_sband.colors"
+       menuGroup="s_band_cart" />
+
+
+<Layer vis="off" type="MDV" name="DBZ K CART" location="mdvp:://ncar-spol.dyndns.org:0:mdv/cart/moments/kband/sur"
+       field="DBZ" render="grid" colorscale="http://rap.ucar.edu/colorscales/dbz.colors"
+       menuGroup="k_band_cart" />
+
+<Layer vis="off" type="MDV" name="VEL K CART" location="mdvp:://ncar-spol.dyndns.org:0:mdv/cart/moments/kband/sur"
+       field="VEL" render="grid" colorscale="http://rap.ucar.edu/colorscales/vel.colors"
+       menuGroup="k_band_cart" />
+
+<Layer vis="off" type="MDV" name="WIDTH K CART" location="mdvp:://ncar-spol.dyndns.org:0:mdv/cart/moments/kband/sur"
+       field="WIDTH" render="grid" colorscale="http://rap.ucar.edu/colorscales/width.colors"
+       menuGroup="k_band_cart" />
+
+<Layer vis="off" type="MDV" name="LDRH K CART" location="mdvp:://ncar-spol.dyndns.org:0:mdv/cart/moments/kband/sur"
+       field="LDRH" render="grid" colorscale="http://rap.ucar.edu/colorscales/ldr.colors"
+       menuGroup="k_band_cart" />
+
+<Layer vis="off" type="MDV" name="DBZ K CART RHI" location="mdvp:://ncar-spol.dyndns.org:0:mdv/cart/moments/kband/rhi"
+       field="DBZ" render="grid" colorscale="http://rap.ucar.edu/colorscales/dbz.colors"
+       menuGroup="k_band_cart" />
+
+<Layer vis="off" type="MDV" name="VEL K CART RHI" location="mdvp:://ncar-spol.dyndns.org:0:mdv/cart/moments/kband/rhi"
+       field="VEL" render="grid" colorscale="http://rap.ucar.edu/colorscales/vel.colors"
+       menuGroup="k_band_cart" />
+
+<Layer vis="off" type="MDV" name="WIDTH K CART RHI" location="mdvp:://ncar-spol.dyndns.org:0:mdv/cart/moments/kband/rhi"
+       field="WIDTH" render="grid" colorscale="http://rap.ucar.edu/colorscales/width.colors"
+       menuGroup="k_band_cart" />
+
+<Layer vis="off" type="MDV" name="LDRH K CART RHI" location="mdvp:://ncar-spol.dyndns.org:0:mdv/cart/moments/kband/rhi"
+       field="LDRH" render="grid" colorscale="http://rap.ucar.edu/colorscales/ldr.colors"
+       menuGroup="k_band_cart" />
+
+<Layer vis="off" type="MDV" name="PID CART" location="mdvp:://ncar-spol.dyndns.org:0:mdv/cart/partrain/sband/sur"
+       field="PID" render="grid" colorscale="http://rap.ucar.edu/colorscales/pid.colors"
+       menuGroup="pid_rainrate_cart" />
+
+<Layer vis="off" type="MDV" name="PID CART RHI" location="mdvp:://ncar-spol.dyndns.org:0:mdv/cart/partrain/sband/rhi"
+       field="PID" render="grid" colorscale="http://rap.ucar.edu/colorscales/pid.colors"
+       menuGroup="pid_rainrate_cart" />
+
+<Layer vis="off" type="MDV" name="RATE ZH CART" location="mdvp:://ncar-spol.dyndns.org:0:mdv/cart/partrain/sband/sur"
+       field="RATE_ZH" render="grid" colorscale="http://rap.ucar.edu/colorscales/precip.colors"
+       menuGroup="pid_rainrate_cart" />
+
+<Layer vis="off" type="MDV" name="RATE Z ZDR" location="mdvp:://ncar-spol.dyndns.org:0:mdv/cart/partrain/sband/sur"
+       field="RATE_Z_ZDR" render="grid" colorscale="http://rap.ucar.edu/colorscales/precip.colors"
+       menuGroup="pid_rainrate_cart" />
+
+<Layer vis="off" type="MDV" name="RATE KDP CART" location="mdvp:://ncar-spol.dyndns.org:0:mdv/cart/partrain/sband/sur"
+       field="RATE_KDP" render="grid" colorscale="http://rap.ucar.edu/colorscales/precip.colors"
+       menuGroup="pid_rainrate_cart" />
+
+<Layer vis="off" type="MDV" name="RATE KDP ZDR" location="mdvp:://ncar-spol.dyndns.org:0:mdv/cart/partrain/sband/sur"
+       field="RATE_KDP_ZDR" render="grid" colorscale="http://rap.ucar.edu/colorscales/precip.colors"
+       menuGroup="pid_rainrate_cart" />
+
+<Layer vis="off" type="MDV" name="RATE HYBRID CART" location="mdvp:://ncar-spol.dyndns.org:0:mdv/cart/partrain/sband/sur"
+       field="RATE_HYBRID" render="grid" colorscale="http://rap.ucar.edu/colorscales/precip.colors"
+       menuGroup="pid_rainrate_cart" />
+
+
+<Layer vis="off" type="MDV" name="VIS" location="mdvp:://ncar-spol.dyndns.org::mdv/sat/vis"
+       field="VIS" render="grid" colorscale="http://rap.ucar.edu/colorscales/sat_albedo.colors"
+       menuGroup="satellite" />
+
+<Layer vis="off" type="MDV" name="IR" location="mdvp:://ncar-spol.dyndns.org::mdv/sat/ir"
+       field="IR" render="grid" colorscale="http://rap.ucar.edu/colorscales/sat_tempK_toga.colors"
+       menuGroup="satellite" />
+
+<Layer vis="off" type="MDV" name="WV" location="mdvp:://ncar-spol.dyndns.org::mdv/sat/wv"
+       field="WV" render="grid" colorscale="http://rap.ucar.edu/colorscales/wv_uw.colors"
+       menuGroup="satellite" />
+
+<Layer vis="off" type="MDV" name="WV-color" location="mdvp:://ncar-spol.dyndns.org::mdv/sat/wv"
+       field="WV" render="grid" colorscale="http://rap.ucar.edu/colorscales/sat_tempK.colors"
+       menuGroup="satellite" />
+
+<Layer vis="off" type="MDV" name="IR-color" location="mdvp:://ncar-spol.dyndns.org::mdv/sat/ir"
+       field="IR" render="grid" colorscale="http://rap.ucar.edu/colorscales/sat_tempK_2.colors"
+       menuGroup="satellite" />
+
+<Layer vis="off" type="MDV" name="WV-color" location="mdvp:://ncar-spol.dyndns.org::mdv/sat/wv"
+       field="WV" render="grid" colorscale="http://rap.ucar.edu/colorscales/sat_tempK_2.colors"
+       menuGroup="satellite" />
+
+<!-- MDVWIND Layers -->
+
+<!-- SYMPROD Layers -->
+
+<Layer vis="on" type="SYMPROD" name="RHI-ticks" location="spdbp:Rhi2Symprod:ticks//ncar-spol.dyndns.org::spdb/rhi/sband"
+       before="30mins" after="10mins" textOff="0.4" request="interval" />
+
+<Layer vis="off" type="SYMPROD" name="RHI-label" location="spdbp:Rhi2Symprod:label//ncar-spol.dyndns.org::spdb/rhi/sband"
+       before="20mins" after="10mins" textOff="0.4" request="valid" />
+
+<Layer vis="off" type="SYMPROD" name="METARS-simple" location="spdbp:Metar2Symprod:simple//ncar-spol.dyndns.org::spdb/metar"
+       before="90mins" after="0hrs" textOff="0" request="latest" />
+
+<Layer vis="off" type="SYMPROD" name="METARS-full" location="spdbp:Metar2Symprod:labels//ncar-spol.dyndns.org::spdb/metar"
+       before="90mins" after="0hrs" textOff="0" request="latest" />
+
+<Layer vis="off" type="SYMPROD" name="SHIP-OBS" location="spdbp:Metar2Symprod:simple//ncar-spol.dyndns.org::spdb/ship_obs"
+       before="2hrs" after="30mins" textOff="0.0001" request="latest" />
+
+<Layer vis="off" type="SYMPROD" name="SYN-OBS" location="spdbp:Metar2Symprod:simple//ncar-spol.dyndns.org::spdb/synop_obs"
+       before="4hrs" after="6mins" textOff="0" request="latest" />
+
+<Layer vis="off" type="SYMPROD" name="WWLLN-1hour" location="spdbp:Ltg2Symprod:wwlln//ncar-spol.dyndns.org::spdb/wwlln"
+       before="1hrs" after="0hrs" textOff="0" request="interval" />
+
+<Layer vis="off" type="SYMPROD" name="WWLLN-3hour" location="spdbp:Ltg2Symprod:wwlln//ncar-spol.dyndns.org::spdb/wwlln"
+       before="3hrs" after="0hrs" textOff="0" request="interval" />
+
+<Layer vis="off" type="SYMPROD" name="WWLLN-6hour" location="spdbp:Ltg2Symprod:wwlln//ncar-spol.dyndns.org::spdb/wwlln"
+       before="6hrs" after="0hrs" textOff="0" request="interval" />
+
+<Layer vis="off" type="SYMPROD" name="FALCON-tracks 05 min"
+       location="spdbp:AcTrack2Symprod:05_min//ncar-spol.dyndns.org::spdb/ac_posn/falcon"
+       before="15mins" after="15mins" textOff="0.4" request="closest" />
+
+<Layer vis="off" type="SYMPROD" name="FALCON-tracks 10 min"
+       location="spdbp:AcTrack2Symprod:10_min//ncar-spol.dyndns.org::spdb/ac_posn/falcon"
+       before="15mins" after="15mins" textOff="0.4" request="closest" />
+
+<Layer vis="off" type="SYMPROD" name="FALCON-tracks 20 min"
+       location="spdbp:AcTrack2Symprod:20_min//ncar-spol.dyndns.org::spdb/ac_posn/falcon"
+       before="15mins" after="15mins" textOff="0.4" request="closest" />
+
+<Layer vis="off" type="SYMPROD" name="P3-tracks 20 min"
+       location="spdbp:AcTrack2Symprod:20_min//ncar-spol.dyndns.org::spdb/ac_posn/p3"
+       before="15mins" after="15mins" textOff="0.4" request="closest" />
+
+<Layer vis="off" type="SYMPROD" name="P3-tracks 40 min"
+       location="spdbp:AcTrack2Symprod:40_min//ncar-spol.dyndns.org::spdb/ac_posn/p3"
+       before="15mins" after="15mins" textOff="0.4" request="closest" />
+
+<Layer vis="off" type="SYMPROD" name="P3-tracks 60 min"
+       location="spdbp:AcTrack2Symprod:60_min//ncar-spol.dyndns.org::spdb/ac_posn/p3"
+       before="15mins" after="15mins" textOff="0.4" request="closest" />
+
+<!-- CIDDMAP Layers -->
+
+<Layer vis="on" type="CIDDMAP" name="World"
+       location="http://rap.ucar.edu/maps/world_states.map"
+       color="white" width="1" />
+
+<Layer vis="on" type="CIDDMAP" name="Maldives"
+       location="http://rap.ucar.edu/maps/maldives.map"
+       color="white" width="1" />
+
+<Layer vis="off" type="CIDDMAP" name="Towers"
+       location="http://rap.ucar.edu/maps/dynamo_towers.map"
+       color="cyan" width="0" />
+
+<Layer vis="off" type="CIDDMAP" name="Points"
+       location="http://rap.ucar.edu/maps/dynamo_points.map"
+       color="cyan" width="0" />
+
+<!-- RANGE_RING Layers -->
+
+<Layer vis="on" type="RANGE_RINGS" name="Range Rings"
+       followData="false" radarLat="-0.630447" radarLon="73.102766"
+       color="gray" width="1"
+       numRings="8" radiusIncr="25"
+       displayAzLines="true" />
+
+<!--
+ ####################################################################################################################################
+
+ Groups
+
+ There are three types of groups:
+ MenuGroups       - Are groups that determine where layers end up in the GUI menus. If a layer is added to a default
+                    group (GRIDS_MENU, FEATURES_MENU, MAPS_MENU) the layer will appear in the corresponding menu in the
+                    GUI. If a layer is added to a MenuGroup that has one of the default groups as a parent, the layer will
+                    be put in a submenu corresponding to that MenuGroup.
+ VisibilityGroups - Are used to control the visibility of layers. There is one default VisibilityGroup called
+                    GRIDS_EXCLUSIVE that ensures no more than one grid is visible at a time. Gridded layers are added to
+                    this group by default. To override, specify visibilityGroups="none" for the layer, and you will be
+                    able to show the layer at the same time as other grids.
+ SpecialGroups    - Are defined in the JAM XML and known to the application code. They enable any sort of custom event
+                    handling within the application. There is one special group available to all apps that have
+                    vertical xsections: XSECT_FEATURES - add feature layers to this group if you want them to show up
+                    in the vertical section display.
+
+ <MenuGroup> element (optional, any number of these allowed).
+ Required attributes:
+
+ name        = the name of the group (has to be unique)
+ label       = the label to be used on the sub-menu in the GUI.
+ parentGroup = the name of a menu group to act as the parent of this group. Use one of the default groups (GRIDS_MENU, FEATURES_MENU, or MAPS_MENU),
+               another MenuGroup defined here, or reference a special group that is used to build special menus in the application code.
+
+
+<VisibilityGroup> element (optional, any number of these allowed).
+ Required attributes:
+ name       = the name of the group (has to be unique)
+ type       = specifies what control the group will exercise on the visibility its members ('exclusive', or 'synchronized')
+
+ -->
+
+<MenuGroup name="s_band_filtered" label="S Band moments filtered" parentGroup="GRIDS_MENU" />
+<MenuGroup name="s_band_raw" label="S Band moments raw" parentGroup="GRIDS_MENU" />
+<MenuGroup name="k_band_raw" label="K Band moments raw" parentGroup="GRIDS_MENU" />
+<MenuGroup name="pid_rainrate" label="PID/RainRate" parentGroup="GRIDS_MENU" />
+
+<MenuGroup name="s_band_cart" label="S Band moments Cartesian" parentGroup="s_band_filtered" />
+<MenuGroup name="k_band_cart" label="K Band moments Cartesian" parentGroup="k_band_raw" />
+<MenuGroup name="pid_rainrate_cart" label="PID/RainRate Cartesian" parentGroup="pid_rainrate" />
+
+<MenuGroup name="smartr" label="SMARTR" parentGroup="GRIDS_MENU" />
+<MenuGroup name="repoh" label="REPOH" parentGroup="GRIDS_MENU" />
+<MenuGroup name="satellite" label="Satellite" parentGroup="GRIDS_MENU" />
+
+<!--
+####################################################################################################################################
+
+ Time configuration (optional, zero or one):
+
+ mode     = "realtime" or "archive" - determines data refresh and time window marching
+ start    = in realtime mode, start is relative to now (+ or - number of hrs or mins, or "now"), e.g., "-12hrs"
+            in archive mode, start must be an explicit time in the format "yyyy-MM-dd'T'HH:mm" (e.g. 2008-04-30T23:41)
+ end      = in realtime mode, end is relative to now (+ or - number of hrs or mins, or "now"), e.g., "+15mins"
+            in archive mode, end must be an explicit time in the format "yyyy-MM-dd'T'HH:mm" (e.g. 2008-04-30T23:41)
+ interval = time between selectable (and animated) ticks, beginning with the start time and ending at or before the end time
+ update   = time between checks for data updates (in realtime only). For performance reasons, keep this value >= 5mins.
+ timeZone = time zone to use for the interpretation of start/end, and to use for the display. Defaults to UTC if omitted.
+            Abbreviations and full descriptions are ok (eg: MST or America/Denver).  See http://en.wikipedia.org/wiki/Time_zone
+            for a description, and http://www.timezoneconverter.com/ for a listing
+
+####################################################################################################################################
+-->
+
+<Time mode="realtime" start="-3hrs" end="+0hrs" interval="15mins" update="120secs"/>
+
+<!--
+####################################################################################################################################
+
+ Animation configuration (optional, zero or one):
+
+ delay = minimum milliseconds delay between animation frames
+ dwell = minimum milliseconds pause at the end of an animation sequence
+
+####################################################################################################################################
+-->
+
+<Animation delay="75" dwell="3000" />
+
+<!--
+####################################################################################################################################
+
+ Altitude configuration (optional, zero or one):
+
+ units    = the units for the vertical scale (km, m, ft, FL, or mb)
+ bottom   = lowest altitude of range, in the same units defined above (if in mb, may be greater numerically than top)
+ top      = highest altitude of range, in the same units defined above (if in mb, may be lesser numerically than bottom)
+ interval = the interval to use for dividing up the distance between bottom and top
+ default  = optional initial altitude, in the same units defined above (defaults to same value as "bottom")
+
+ or
+
+ dataDrivenProperties = optional. Overrides other attributes. If true, altitude's range and levels will be
+                        dynamically set according to selected/on layer.
+
+####################################################################################################################################
+-->
+
+<!--Altitude units="ft" bottom="0" top="40000" interval="1000" default="6000"/-->
+<!--Altitude units="FL" bottom="0" top="300" interval="10" default="100"/-->
+<!--Altitude units="km" bottom="0" top="16" interval="0.25" default="3"/-->
+<!--Altitude units="mb" bottom="1000" top="0" interval="50" default="700" /-->
+<Altitude dataDrivenProperties="true" />
+
+<!--
+####################################################################################################################################
+
+ View configuration (optional, zero or one):
+
+   projection = the projection in which to view the data. One of the below list.
+
+ Projection-specific configuration:
+
+ LatLon:
+   none, defaults to -180 to +180 longitude and -90 to +90 latitude
+
+ Flat:
+   originLon  = longitude of the origin
+   originLat  = latitude of the origin
+   rotation = rotation of the projection
+
+ LambertConformal:
+   originLat = origin's latitude
+   originLon = origin's longitude
+   stdLat1 = standard latitude 1
+   stdLat2 = standard latitude 2 (optional)
+
+ Stereographic:
+   tangentLon = tangent longitude
+   tangentLat = tangent latitude
+   secantLat = secant latitude, if applicable due to secant plane
+
+ PolarStereographic:
+   tangentLon = tangent longitude
+   poleIsNorth = "true" or "false" (optional - defaults to "true")
+   centralScale = central scale of projection (optional - defaults to 1.0)
+
+ Albers:
+   originLat = origin's latitude
+   originLon = origin's longitude
+   lat1 = standard latitude 1
+   lat2 = standard latitude 2
+
+ AzimEquidist:
+   originLat = origin's latitude
+   originLon = origin's longitude
+   rotation = rotation of the projection (optional - defaults to 0.0)
+
+ LambertAzimuthal:
+   originLat = origin's latitude
+   originLon = origin's longitude
+
+ Mercator:
+   originLat = origin's latitude
+   originLon = origin's longitude
+
+ TransMercator:
+   originLat = origin's latitude
+   originLon = origin's longitude
+   centralScale = central scale of the projection (optional - defaults to 1.0)
+
+ VerticalPerspective:
+   originLat = origin's latitude
+   originLon = origin's longitude
+   perspRadius = the perspective radius of the projection
+
+####################################################################################################################################
+-->
+
+<!--View projection="LambertConformal" originLon="-95.0" originLat="25.0" stdLat1="25.0" /-->
+<!--View projection="Stereographic" tangentLon="-135.0" tangentLat="90.0"/-->
+<!--View projection="LatLon" /-->
+<!--View projection="Flat" originLon="120.433502" originLat="22.526699" rotation="0.0" /-->
+<View projection="Flat" originLon="73.102766" originLat="-0.630447" rotation="0" />
+
+<!--
+####################################################################################################################################
+
+ Areas of Interest (optional, zero or more):
+
+   name = the name of the Area shown in the display
+ minLon = the minimum longitude of the lat/lon bounding box defining the Area in decimal degrees or degrees, minutes, seconds
+ minLat = the minimum latitude of the lat/lon bounding box defining the Area in decimal degrees or degrees, minutes, seconds
+ maxLon = the maximum longitude of the lat/lon bounding box defining the Area in decimal degrees or degrees, minutes, seconds
+ maxLat = the maximum latitude of the lat/lon bounding box defining the Area in decimal degrees or degrees, minutes, seconds
+ defaultView = (optional) true or false; if true, then the Area will be the default view for the main window
+
+ Note:
+   - If more than one Area has a defaultView of true, then the last one listed will be the default view
+
+    name  defaultView   minLon   minLat maxLon  maxLat
+
+####################################################################################################################################
+-->
+
+<Area name="40km" minLon="72.743" maxLon="73.4625" minLat="-0.990149" maxLat="-0.27072"/>
+<Area name="75km" minLon="72.4281" maxLon="73.7772" minLat="-1.30486" maxLat="0.0440507"/>
+<Area name="150km" minLon="71.7531" maxLon="74.4517" minLat="-1.97909" maxLat="0.718542" defaultView="true"/>
+<Area name="500km" minLon="68.5929" maxLon="77.6049" minLat="-5.12034" maxLat="3.86334"/>
+<Area name="1000km" minLon="64.0194" maxLon="82.1548" minLat="-9.57824" maxLat="8.3331"/>
+<Area name="3000km" minLon="43.8991" maxLon="102.009" minLat="-26.4527" maxLat="25.3504"/>
+<Area name="5000km" minLon="17.7587" maxLon="127.602" minLat="-39.6549" maxLat="38.9303"/>
+
+<!--
+####################################################################################################################################
+
+ Window parameters (optional element, zero or one):
+
+ width = pixel width of the window, if the screen is big enough
+ height = pixel height of the window, if the screen is big enough
+ xOrigin = (optional) pixel x location of the upper left of the window, measured from upper left of the screen
+ yOrigin = (optional) pixel y location of the upper left of the window, measured from upper left of the screen (positive downwards)
+ backgroundColor = (optional) defaults to white
+
+####################################################################################################################################
+-->
+<Window width="1000" height="1000" xOrigin="0" yOrigin="0" backgroundColor="black"/>
+
+<!--
+####################################################################################################################################
+
+ This section MUST appear *below* the Layer definitions!
+
+ XSections:
+
+ XSections = optional element. Zero or one allowed. If this element is missing, then cross-sections will be disabled.
+ Path = optional element representing a preconfigured xsect path. Zero or more allowed.  Leave this out to enable arbitrary,
+        user-entered cross sections.
+   name = name attribute for the xsection Path element
+   Waypoint = 2 or more elements required for each Path. Ordered waypoints for the path. Requires lat and lon attributes.
+
+####################################################################################################################################
+-->
+
+<!--XSections>
+  <Path name="Test 1">
+    <Waypoint lat="23.147" lon="120.056"/>
+    <Waypoint lat="22.862" lon="120.134"/>
+  </Path>
+  <Path name="Test 2">
+    <Waypoint lat="22.309" lon="119.75"/>
+    <Waypoint lat="22.494" lon="120.244"/>
+  </Path>
+</XSections-->
+
+<XSections>
+</XSections>
+
+<!--
+####################################################################################################################################
+
+ SkewT parameters:
+
+ SkewT            = optional element. Zero or one allowed. If this element is missing, then SkewTs will be disabled.
+ location         = Required. where to get the data eg: mdvp:://yaw:10000:ruc/mdv/lambert
+ temperatureField = Required. Name of the MDV 3-D temperature field.
+ rhField          = either rhField or dewpointField required.  Name of the MDV 3-D relative humidity field. Server side units
+                    must be correct (ie: % means 0..100, whereas unitless means 0..1)
+ dewpointField    = either rhField or dewpointField required. Name of the MDV 3-D dewpoint field.
+ uField           = Required. Name of the MDV 3-D u-wind field. Speed/dir not supported (yet)
+ vField           = Required. Name of the MDV 3-D v-wind field. Speed/dir not supported (yet)
+
+####################################################################################################################################
+-->
+
+<!--SkewT location="mdvp:://yaw:10000:ruc/mdv/lambert"
+       temperatureField="TMP"
+       rhField="R_H"
+       uField="UGRD"
+       vField="VGRD">
+</SkewT-->
+
+<!--SkewT location="mdvp:://yaw:10000:ruc/mdv/lambert"
+       temperatureField="TMP"
+       rhField="R_H"
+       uField="UGRD"
+       vField="VGRD">
+</SkewT-->
+
+<!--
+####################################################################################################################################
+
+ Optional tools.  Each tool will only appear if the associated element is found in this file.
+ You can comment out tools that are not desired.
+
+####################################################################################################################################
+-->
+
+<SwapFieldsTool/>
+
+<!--
+  ####################################################################################################################################
+
+   ColorScale configuration (zero or more):
+
+   id    = the name of the colorscale, used to refer to it from "Layer" defintions
+   Range = one or more Range elements required
+   min   = the minimum value of the bin; attribute of the Range element, required
+   max   = the maximum value of the bin; attribute of the Range element, required
+   color = an X11-defined color name, RGB triplet (0..255 for each value), or hex group ("wheat1", "153,153,153", "#ffffcc");
+           attribute of the Range element, required
+   label = the optional custom label to apply to this bin. Defaults to the numeric values of the bin boundaries.
+           ; attribute of the Range element, optional
+
+   Note:
+      - when a value can be in more than one bin (overlapping) the last matching (descending) bin color is used
+
+  ####################################################################################################################################
+  -->
+<ColorScale id="airColorscale">
+  <Range min="-80" max="-35" color="LightYellow1"      label="-35<" />
+  <Range min="-35" max="-30" color="LightYellow2"      label="" />
+  <Range min="-30" max="-25" color="wheat1"            label="" />
+  <Range min="-25" max="-15" color="LightYellow3"      label="" />
+  <Range min="-15" max="-10" color="RosyBrown3"        label="" />
+  <Range min="-10" max="-5"  color="medium slate blue" label="" />
+  <Range min="-5"  max="0"   color="dark slate blue"   label="" />
+  <Range min="0"   max="5"   color="blue"              label="" />
+  <Range min="5"   max="10"  color="royal blue"        label="" />
+  <Range min="10"  max="14"  color="slate gray"        label="" />
+  <Range min="14"  max="17"  color="dark slate gray"   label="" />
+  <Range min="17"  max="20"  color="dark green"        label="" />
+  <Range min="20"  max="23"  color="forest green"      label="" />
+  <Range min="23"  max="26"  color="lime green"        label="" />
+  <Range min="26"  max="29"  color="lawn green"        label="" />
+  <Range min="29"  max="32"  color="yellow"            label="" />
+  <Range min="32"  max="35"  color="gold1"             label="" />
+  <Range min="35"  max="38"  color="DarkGoldenrod1"    label="" />
+  <Range min="38"  max="41"  color="orange"            label="" />
+  <Range min="41"  max="44"  color="sienna1"           label="" />
+  <Range min="44"  max="47"  color="orange red"        label="" />
+  <Range min="47"  max="50"  color="red1" />
+</ColorScale>
+
+<ColorScale id="tempColorscale">
+  <Range min="-50" max="-45"  color="204,153,255"/>
+  <Range min="-45" max="-40"  color="153,102,255"/>
+  <Range min="-40" max="-35"  color="102,51,153"/>
+  <Range min="-35" max="-30"  color="0,0,204"/>
+  <Range min="-30" max="-25"  color="0,0,255"/>
+  <Range min="-25" max="-20"  color="51,102,255"/>
+  <Range min="-20" max="-15"  color="51,153,255"/>
+  <Range min="-15" max="-10"  color="102,204,255"/>
+  <Range min="-10" max="-5"   color="153,204,255"/>
+  <Range min="-5"  max="0"    color="204,204,255"/>
+  <Range min="0"   max="5"    color="255,255,153"/>
+  <Range min="5"   max="10"   color="255,204,0"/>
+  <Range min="10"  max="15"   color="255,153,0"/>
+  <Range min="15"  max="20"   color="255,102,0"/>
+  <Range min="20"  max="25"   color="255,51,0"/>
+  <Range min="25"  max="30"   color="255,0,0"/>
+  <Range min="30"  max="35"   color="204,0,0"/>
+</ColorScale>
+
+<!--
+ wind.colors
+
+ For the Taiwan system. Winds below 60
+ are cool colours - over 60
+ they are hot colours.
+-->
+<ColorScale id="windColorsTaiwan">
+  <Range min="0"   max="15"  color="75,75,75" />
+  <Range min="15"  max="30"  color="102,102,102" />
+  <Range min="30"  max="45"  color="128,128,128" />
+  <Range min="45"  max="60"  color="153,153,153" />
+  <Range min="60"  max="70"  color="dark slate blue" />
+  <Range min="70"  max="80"  color="RoyalBlue" />
+  <Range min="80"  max="90"  color="SteelBlue1" />
+  <Range min="90"  max="100" color="purple" />
+  <Range min="100" max="110" color="sea green" />
+  <Range min="110" max="120" color="lime green" />
+  <Range min="120" max="150" color="orange" />
+  <Range min="150" max="200" color="chocolate" />
+</ColorScale>
+
+<ColorScale id="windColors">
+  <Range min="0"   max="15"  color="255,255,255"/>
+  <Range min="15"   max="30"  color="204,255,255"/>
+  <Range min="30"   max="45"  color="153,255,255"/>
+  <Range min="45"   max="60"  color="153,255,204"/>
+  <Range min="60"   max="75"  color="153,255,102"/>
+  <Range min="75"   max="90"  color="204,255,102"/>
+  <Range min="90"   max="105"  color="255,255,153"/>
+  <Range min="105"   max="120"  color="255,204,0"/>
+  <Range min="120"   max="135"  color="255,153,0"/>
+  <Range min="135"   max="150"  color="255,102,0"/>
+  <Range min="150"   max="165"  color="255,51,0"/>
+  <Range min="165"   max="180"  color="204,0,0"/>
+</ColorScale>
+
+<ColorScale id="radar_colorscale">
+  <Range min="5.0" max="10.0" color="102,255,255"/>
+  <Range min="10.0" max="15.0" color="51,153,255"/>
+  <Range min="15.0" max="20.0" color="0,0,255"/>
+  <Range min="20.0" max="25.0" color="0,255,0"/>
+  <Range min="25.0" max="30.0" color="0,204,0"/>
+  <Range min="30.0" max="35.0" color="0,153,0"/>
+  <Range min="35.0" max="40.0" color="255,255,0"/>
+  <Range min="40.0" max="45.0" color="255,204,0"/>
+  <Range min="45.0" max="50.0" color="255,102,0"/>
+  <Range min="50.0" max="55.0" color="255,0,0"/>
+  <Range min="55.0" max="60.0" color="204,51,0"/>
+  <Range min="60.0" max="65.0" color="153,0,0"/>
+  <Range min="65.0" max="70.0" color="255,0,255"/>
+  <Range min="70.0" max="75.0" color="153,51,204"/>
+</ColorScale>
+
+<ColorScale id="saudi_dbz_colorscale">
+  <Range min="-10.0" max="-5.0" color="53,53,53"/>
+  <Range min="-5.0" max="0.0" color="117,117,117"/>
+  <Range min="0.0" max="5.0" color="0,90,0"/>
+  <Range min="5.0" max="10.0" color="0,126,0"/>
+  <Range min="10.0" max="15.0" color="28,71,232"/>
+  <Range min="15.0" max="20.0" color="8,127,219"/>
+  <Range min="20.0" max="25.0" color="110,13,198"/>
+  <Range min="25.0" max="30.0" color="200,15,134"/>
+  <Range min="30.0" max="35.0" color="192,100,135"/>
+  <Range min="35.0" max="40.0" color="210,136,59"/>
+  <Range min="40.0" max="45.0" color="250,196,49"/>
+  <Range min="45.0" max="50.0" color="254,250,3"/>
+  <Range min="50.0" max="54.0" color="254,154,88"/>
+  <Range min="54.0" max="58.0" color="254,95,5"/>
+  <Range min="58.0" max="62.0" color="253,52,28"/>
+  <Range min="62.0" max="66.0" color="190,190,190"/>
+  <Range min="66.0" max="70.0" color="211,211,211"/>
+</ColorScale>
+
+<ColorScale id="torp_colorscale">
+  <Range min="-35" max="-30" color="102,255,255"/>
+  <Range min="-30" max="-25" color="51,153,255"/>
+  <Range min="-25" max="-20" color="0,0,255"/>
+  <Range min="-20.0" max="-15.0" color="0,255,0"/>
+  <Range min="-15.0" max="-10.0" color="0,204,0"/>
+  <Range min="-10.0" max="-5.0" color="0,153,0"/>
+  <Range min="-5.0" max="0.0" color="255,255,0"/>
+  <Range min="0.0" max="5.0" color="255,204,0"/>
+  <Range min="5.0" max="10.0" color="255,102,0"/>
+  <Range min="10.0" max="15.0" color="255,0,0"/>
+  <Range min="15.0" max="20.0" color="204,51,0"/>
+  <Range min="20.0" max="25.0" color="153,0,0"/>
+  <Range min="25.0" max="30.0" color="255,0,255"/>
+  <Range min="30.0" max="35.0" color="153,51,204"/>
+</ColorScale>
+
+<ColorScale id="topo_colorscale">
+  <Range min="0" max="315" color="102,51,0"/>
+  <Range min="315" max="630" color="111,60,9"/>
+  <Range min="630" max="945" color="119,68,17"/>
+  <Range min="945" max="1260" color="128,77,26"/>
+  <Range min="1260" max="1575" color="137,86,35"/>
+  <Range min="1575" max="1890" color="145,94,43"/>
+  <Range min="1890" max="2215" color="153,102,51"/>
+  <Range min="2215" max="2530" color="162,111,60"/>
+  <Range min="2530" max="2845" color="170,119,68"/>
+  <Range min="2845" max="3160" color="179,128,77"/>
+  <Range min="3160" max="3475" color="188,137,86"/>
+  <Range min="3475" max="3790" color="196,145,94"/>
+  <Range min="3790" max="4105" color="204,153,102"/>
+  <Range min="4105" max="4420" color="213,162,111"/>
+  <Range min="4420" max="4735" color="221,170,119"/>
+  <Range min="4735" max="5050" color="230,179,128"/>
+  <Range min="5050" max="5365" color="239,188,137"/>
+  <Range min="5365" max="5680" color="247,196,145"/>
+  <Range min="5680" max="6000" color="255,204,153"/>
+</ColorScale>
+
+
+<!--
+####################################################################################################################################
+
+ Other configuration parameters:
+
+####################################################################################################################################
+-->
+
+</Jazz>

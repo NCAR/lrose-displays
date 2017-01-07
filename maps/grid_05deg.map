@@ -1,0 +1,558 @@
+#
+# Map grid.
+#
+# Created 2002/02/22 17:27:37 UTC
+# min_lat, max_lat, delta_lat: -90, 90, 5
+# min_lon, max_lon, delta_lon: -30, 330, 5
+#
+POLYLINE -90_deg_lat 5
+-90 -30
+-90 60
+-90 150
+-90 240
+-90 330
+
+POLYLINE -85_deg_lat 5
+-85 -30
+-85 60
+-85 150
+-85 240
+-85 330
+
+POLYLINE -80_deg_lat 5
+-80 -30
+-80 60
+-80 150
+-80 240
+-80 330
+
+POLYLINE -75_deg_lat 5
+-75 -30
+-75 60
+-75 150
+-75 240
+-75 330
+
+POLYLINE -70_deg_lat 5
+-70 -30
+-70 60
+-70 150
+-70 240
+-70 330
+
+POLYLINE -65_deg_lat 5
+-65 -30
+-65 60
+-65 150
+-65 240
+-65 330
+
+POLYLINE -60_deg_lat 5
+-60 -30
+-60 60
+-60 150
+-60 240
+-60 330
+
+POLYLINE -55_deg_lat 5
+-55 -30
+-55 60
+-55 150
+-55 240
+-55 330
+
+POLYLINE -50_deg_lat 5
+-50 -30
+-50 60
+-50 150
+-50 240
+-50 330
+
+POLYLINE -45_deg_lat 5
+-45 -30
+-45 60
+-45 150
+-45 240
+-45 330
+
+POLYLINE -40_deg_lat 5
+-40 -30
+-40 60
+-40 150
+-40 240
+-40 330
+
+POLYLINE -35_deg_lat 5
+-35 -30
+-35 60
+-35 150
+-35 240
+-35 330
+
+POLYLINE -30_deg_lat 5
+-30 -30
+-30 60
+-30 150
+-30 240
+-30 330
+
+POLYLINE -25_deg_lat 5
+-25 -30
+-25 60
+-25 150
+-25 240
+-25 330
+
+POLYLINE -20_deg_lat 5
+-20 -30
+-20 60
+-20 150
+-20 240
+-20 330
+
+POLYLINE -15_deg_lat 5
+-15 -30
+-15 60
+-15 150
+-15 240
+-15 330
+
+POLYLINE -10_deg_lat 5
+-10 -30
+-10 60
+-10 150
+-10 240
+-10 330
+
+POLYLINE -5_deg_lat 5
+-5 -30
+-5 60
+-5 150
+-5 240
+-5 330
+
+POLYLINE 0_deg_lat 5
+0 -30
+0 60
+0 150
+0 240
+0 330
+
+POLYLINE 5_deg_lat 5
+5 -30
+5 60
+5 150
+5 240
+5 330
+
+POLYLINE 10_deg_lat 5
+10 -30
+10 60
+10 150
+10 240
+10 330
+
+POLYLINE 15_deg_lat 5
+15 -30
+15 60
+15 150
+15 240
+15 330
+
+POLYLINE 20_deg_lat 5
+20 -30
+20 60
+20 150
+20 240
+20 330
+
+POLYLINE 25_deg_lat 5
+25 -30
+25 60
+25 150
+25 240
+25 330
+
+POLYLINE 30_deg_lat 5
+30 -30
+30 60
+30 150
+30 240
+30 330
+
+POLYLINE 35_deg_lat 5
+35 -30
+35 60
+35 150
+35 240
+35 330
+
+POLYLINE 40_deg_lat 5
+40 -30
+40 60
+40 150
+40 240
+40 330
+
+POLYLINE 45_deg_lat 5
+45 -30
+45 60
+45 150
+45 240
+45 330
+
+POLYLINE 50_deg_lat 5
+50 -30
+50 60
+50 150
+50 240
+50 330
+
+POLYLINE 55_deg_lat 5
+55 -30
+55 60
+55 150
+55 240
+55 330
+
+POLYLINE 60_deg_lat 5
+60 -30
+60 60
+60 150
+60 240
+60 330
+
+POLYLINE 65_deg_lat 5
+65 -30
+65 60
+65 150
+65 240
+65 330
+
+POLYLINE 70_deg_lat 5
+70 -30
+70 60
+70 150
+70 240
+70 330
+
+POLYLINE 75_deg_lat 5
+75 -30
+75 60
+75 150
+75 240
+75 330
+
+POLYLINE 80_deg_lat 5
+80 -30
+80 60
+80 150
+80 240
+80 330
+
+POLYLINE 85_deg_lat 5
+85 -30
+85 60
+85 150
+85 240
+85 330
+
+POLYLINE 90_deg_lat 5
+90 -30
+90 60
+90 150
+90 240
+90 330
+
+POLYLINE -30_deg_lon 2
+-90 -30
+90 -30
+
+POLYLINE -25_deg_lon 2
+-90 -25
+90 -25
+
+POLYLINE -20_deg_lon 2
+-90 -20
+90 -20
+
+POLYLINE -15_deg_lon 2
+-90 -15
+90 -15
+
+POLYLINE -10_deg_lon 2
+-90 -10
+90 -10
+
+POLYLINE -5_deg_lon 2
+-90 -5
+90 -5
+
+POLYLINE 0_deg_lon 2
+-90 0
+90 0
+
+POLYLINE 5_deg_lon 2
+-90 5
+90 5
+
+POLYLINE 10_deg_lon 2
+-90 10
+90 10
+
+POLYLINE 15_deg_lon 2
+-90 15
+90 15
+
+POLYLINE 20_deg_lon 2
+-90 20
+90 20
+
+POLYLINE 25_deg_lon 2
+-90 25
+90 25
+
+POLYLINE 30_deg_lon 2
+-90 30
+90 30
+
+POLYLINE 35_deg_lon 2
+-90 35
+90 35
+
+POLYLINE 40_deg_lon 2
+-90 40
+90 40
+
+POLYLINE 45_deg_lon 2
+-90 45
+90 45
+
+POLYLINE 50_deg_lon 2
+-90 50
+90 50
+
+POLYLINE 55_deg_lon 2
+-90 55
+90 55
+
+POLYLINE 60_deg_lon 2
+-90 60
+90 60
+
+POLYLINE 65_deg_lon 2
+-90 65
+90 65
+
+POLYLINE 70_deg_lon 2
+-90 70
+90 70
+
+POLYLINE 75_deg_lon 2
+-90 75
+90 75
+
+POLYLINE 80_deg_lon 2
+-90 80
+90 80
+
+POLYLINE 85_deg_lon 2
+-90 85
+90 85
+
+POLYLINE 90_deg_lon 2
+-90 90
+90 90
+
+POLYLINE 95_deg_lon 2
+-90 95
+90 95
+
+POLYLINE 100_deg_lon 2
+-90 100
+90 100
+
+POLYLINE 105_deg_lon 2
+-90 105
+90 105
+
+POLYLINE 110_deg_lon 2
+-90 110
+90 110
+
+POLYLINE 115_deg_lon 2
+-90 115
+90 115
+
+POLYLINE 120_deg_lon 2
+-90 120
+90 120
+
+POLYLINE 125_deg_lon 2
+-90 125
+90 125
+
+POLYLINE 130_deg_lon 2
+-90 130
+90 130
+
+POLYLINE 135_deg_lon 2
+-90 135
+90 135
+
+POLYLINE 140_deg_lon 2
+-90 140
+90 140
+
+POLYLINE 145_deg_lon 2
+-90 145
+90 145
+
+POLYLINE 150_deg_lon 2
+-90 150
+90 150
+
+POLYLINE 155_deg_lon 2
+-90 155
+90 155
+
+POLYLINE 160_deg_lon 2
+-90 160
+90 160
+
+POLYLINE 165_deg_lon 2
+-90 165
+90 165
+
+POLYLINE 170_deg_lon 2
+-90 170
+90 170
+
+POLYLINE 175_deg_lon 2
+-90 175
+90 175
+
+POLYLINE 180_deg_lon 2
+-90 180
+90 180
+
+POLYLINE 185_deg_lon 2
+-90 185
+90 185
+
+POLYLINE 190_deg_lon 2
+-90 190
+90 190
+
+POLYLINE 195_deg_lon 2
+-90 195
+90 195
+
+POLYLINE 200_deg_lon 2
+-90 200
+90 200
+
+POLYLINE 205_deg_lon 2
+-90 205
+90 205
+
+POLYLINE 210_deg_lon 2
+-90 210
+90 210
+
+POLYLINE 215_deg_lon 2
+-90 215
+90 215
+
+POLYLINE 220_deg_lon 2
+-90 220
+90 220
+
+POLYLINE 225_deg_lon 2
+-90 225
+90 225
+
+POLYLINE 230_deg_lon 2
+-90 230
+90 230
+
+POLYLINE 235_deg_lon 2
+-90 235
+90 235
+
+POLYLINE 240_deg_lon 2
+-90 240
+90 240
+
+POLYLINE 245_deg_lon 2
+-90 245
+90 245
+
+POLYLINE 250_deg_lon 2
+-90 250
+90 250
+
+POLYLINE 255_deg_lon 2
+-90 255
+90 255
+
+POLYLINE 260_deg_lon 2
+-90 260
+90 260
+
+POLYLINE 265_deg_lon 2
+-90 265
+90 265
+
+POLYLINE 270_deg_lon 2
+-90 270
+90 270
+
+POLYLINE 275_deg_lon 2
+-90 275
+90 275
+
+POLYLINE 280_deg_lon 2
+-90 280
+90 280
+
+POLYLINE 285_deg_lon 2
+-90 285
+90 285
+
+POLYLINE 290_deg_lon 2
+-90 290
+90 290
+
+POLYLINE 295_deg_lon 2
+-90 295
+90 295
+
+POLYLINE 300_deg_lon 2
+-90 300
+90 300
+
+POLYLINE 305_deg_lon 2
+-90 305
+90 305
+
+POLYLINE 310_deg_lon 2
+-90 310
+90 310
+
+POLYLINE 315_deg_lon 2
+-90 315
+90 315
+
+POLYLINE 320_deg_lon 2
+-90 320
+90 320
+
+POLYLINE 325_deg_lon 2
+-90 325
+90 325
+
+POLYLINE 330_deg_lon 2
+-90 330
+90 330
+

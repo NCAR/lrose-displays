@@ -1,0 +1,24 @@
+MAP_NAME wsmr_verify
+#
+ICONDEF wsmr_verify 10
+-30 0
+-21 -21
+0 -30
+21 -21
+30 0
+21 21
+0 30
+-21 21
+-30 0
+32767 32767
+#
+ICON wsmr_verify 32.357  -106.380 8 -5 C_Stn 
+ICON wsmr_verify 32.372  -106.488 8 -5 Post
+ICON wsmr_verify 32.900  -106.420 8 -5 Northrup
+ICON wsmr_verify 33.800  -106.683 8 -5 LBTS
+ICON wsmr_verify 33.626  -106.476 8 -5 Duquette
+ICON wsmr_verify 32.900  -106.130 8 -5 Ninnenger
+# END
+
+
+

@@ -1,0 +1,21 @@
+MAP_NAME Hail
+#
+ICONDEF House 14 
+-4 0
+-3 -2
+-2 -3
+0 -4
+2 -3
+3 -2
+4 0
+3 2 
+2 3
+0 4
+-2 3
+-3 2
+-4 0
+32767 32767
+#
+ICON House 39.4170 -104.4519 -8 -5 Skipton 
+ICON House 39.4170 -104.4158 8 -5 Ehmann 
+#END 

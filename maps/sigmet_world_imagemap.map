@@ -1,0 +1,13 @@
+POLYLINE text 2
+ -90 75
+  90 75
+POLYLINE text 2
+ -90 200
+  90 200
+POLYLINE 0_deg_lat 5
+0 -30
+0 60
+0 150
+0 240
+0 330
+

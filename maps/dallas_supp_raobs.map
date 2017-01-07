@@ -1,0 +1,15 @@
+MAP_NAME dallas_raobs
+# Dallas ANC Raob Locations   7/04 enelson
+#
+ICONDEF CROSS 6
+0 -5
+0 5
+32767 32767
+-5 0 
+5 0
+32767 32767
+#
+#            LAT	LON 	   ID
+ICON CROSS  36.6100 -097.490 -8 -5 LMN
+ICON CROSS  33.6075 -102.049 -8 -5 REE
+ICON CROSS  34.3800 -098.240 -8 -5 FSI

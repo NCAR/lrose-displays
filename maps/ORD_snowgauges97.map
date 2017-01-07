@@ -1,0 +1,21 @@
+MAP_NAME ORD_snow_gauges
+# 1997 Locations
+ICONDEF S_GAUGE 12
+0 -4
+0 4
+32767 32767
+-4 0
+4 0
+32767 32767
+3 3
+-3 -3
+32767 32767
+-3 3
+3 -3
+32767 32767
+#                                                                                        
+ICON S_GAUGE 41.96417 -87.88100 4 4  ORD1
+ICON S_GAUGE 41.99333 -87.93833 4 4  ORD2
+ICON S_GAUGE 42.0750  -87.68633 4 4  Wilmette
+ICON S_GAUGE 41.85833 -88.0750  4 4  DuPage
+ICON S_GAUGE 41.78350 -87.75483 4 4  Midway

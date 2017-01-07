@@ -1,0 +1,28 @@
+# NAME sst_degC.colors
+
+# kessinger 	4/13/2001 13:45:46
+
+-6	-3	purple3
+-3	-0.1	dark orchid
+-0.1    0.1	black
+0.1	5	MediumOrchid3
+5	10	ediumPurple1
+10 	15 	magenta
+15	16	violet
+16 	17 	plum2
+17	18	midnight blue
+18 	19	blue
+19 	20 	royal blue
+20	21	deep sky blue
+21	22	dark green
+22 	23	forest green 	
+23	24 	SeaGreen3
+24	25	light green
+25 	26 	gold1
+26 	27 	yellow
+27 	28 	moccasin
+28 	29 	salmon1
+29 	30 	tomato
+30 	32 	brown1
+32 	34 	red
+34 	40 	firebrick3

@@ -1,0 +1,13 @@
+This Directory is manually set up from several Directories in RAP's CVS tree.
+
+The MDS User manual directory comes from doc/html/projects/aoaws/mds_user_manual
+
+The Param files come from apps/cidd/src/CIDD/Params - They get scp'd here manually
+
+The doc directory files come from apps/cidd/doc/html
+
+doc/cidd_examples is currently copied back one dir (into this dir) and
+index.html is linked to it. If you modify index.html/cidd_examples.html,
+please don't forget to copy it into doc/ and commit it.
+
+-F Hage.

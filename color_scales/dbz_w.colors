@@ -1,48 +1,26 @@
 # NAME dbz_wband.colors
 
--60     -43	dark green
--43     -40 	dark olive green
--40     -37 	forest green
--37     -34 	SpringGreen3
--34     -31 	medium sea green
--31     -28     medium aquamarine
--28     -25	medium slate blue
--25     -22	blue
--22     -19 	blue4
--19     -16 	DarkOrchid4
--16     -13 	HotPink4
--13     -10 	maroon
--10      -7 	VioletRed4
- -7      -4 	sienna
- -4      -1 	chocolate
- -1       2 	goldenrod
-  2       5 	gold
-  5       8 	dark salmon
-  8      11	salmon
- 11      14 	firebrick2
- 14      17 	DeepPink1
- 17      20 	light grey
- 20      23 	snow
- 23      50 	dim grey
-
-#-50     -46 	dark green
-#-46     -42 	dark olive green
-#-42     -38 	forest green
-#-38     -34 	SpringGreen3
-#-34     -30     medium sea green
-#-30     -26	medium aquamarine
-#-26     -22	medium slate blue
-#-22     -18 	blue
-#-18     -16 	blue4
-#-16     -12 	DarkOrchid4
-#-12     -08 	HotPink4
-#-08     -04 	maroon
-#-04      00 	VioletRed4
-# 00      04 	sienna
-# 04      08 	chocolate
-# 08      12 	goldenrod
-# 12      16 	yellow
-# 16      22	dark salmon
-# 22      26 	salmon
-# 26      30 	firebrick2
-# 30      60 	DeepPink1
+-40     -35 	dark green
+-35     -30 	dark olive green
+-30     -25 	forest green
+-25     -20 	SpringGreen3
+-20     -15     medium sea green
+-15     -10	medium aquamarine
+-10     -05	medium slate blue
+-05      00 	blue
+ 00      03 	blue4
+ 03      06 	DarkOrchid4
+ 06      09 	HotPink4
+ 09      12 	maroon
+ 12      15 	VioletRed4
+ 15      18 	sienna
+ 18      21 	chocolate
+ 21      24 	goldenrod
+ 24      27 	yellow
+ 27      30	dark salmon
+ 30      35 	salmon
+ 35      40 	firebrick2
+ 40      45 	DeepPink1
+ 45      50 	light grey
+ 50      55 	snow
+ 55	 60	black

@@ -91,7 +91,7 @@ echo "======================================"
 
 docker run \
     -v $HOME/.Xauthority:/root/.Xauthority \
-    -v $tmp/cidd_images:/root/images \
+    -v /tmp/cidd_images:/root/images \
     $(lrose_docker_run_options) \
     ${cidd_docker_image} \
     /usr/local/cidd/bin/CIDD -font fixed \

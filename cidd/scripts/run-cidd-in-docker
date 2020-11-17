@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+# run-cidd-in-docker
 # script to run CIDD from a docker container
 #
 # Dependencies:

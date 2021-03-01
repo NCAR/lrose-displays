@@ -1,0 +1,23 @@
+# NAME zdr.colors
+
+0.00	0.05	dodgerblue3
+0.05	0.10	blue
+0.10    0.15    mediumblue
+0.15    0.20    navyblue
+0.20    0.25    midnightblue
+0.25    0.30    dimgray
+0.30    0.35    slategray
+0.35    0.40    seagreen
+0.40    0.45    forestgreen
+0.45    0.50    olivedrab
+0.50    0.55    gold3
+0.55	0.60	gold
+0.60	0.65  	yellow
+0.65	0.70	orange
+0.70	0.75 	tomato
+0.75	0.80    OrangeRed
+0.80    0.85    Red
+0.85    0.90    DeepPink
+0.90	0.95	Maroon1
+0.95	1.00 	Pink
+

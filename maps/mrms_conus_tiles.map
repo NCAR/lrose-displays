@@ -1,7 +1,7 @@
 POLYLINE NW 5
    38     -130
-   58     -130
-   58     -110
+   55     -130
+   55     -110
    38     -110
    38     -130
 
@@ -9,8 +9,8 @@ SIMPLELABEL 48 -120 NORTH-WEST
 
 POLYLINE NR 5
    38     -114
-   58     -114
-   58     -94
+   55     -114
+   55     -94
    38     -94
    38     -114
 
@@ -18,8 +18,8 @@ SIMPLELABEL 48 -104 NORTH-ROCKIES
 
 POLYLINE NC 5
    38     -98
-   58     -98
-   58     -78
+   55     -98
+   55     -78
    38     -78
    38     -98
 
@@ -27,8 +27,8 @@ SIMPLELABEL 48 -88 NORTH-CENTRAL
 
 POLYLINE NE 5
    38     -82
-   58     -82
-   58     -62
+   55     -82
+   55     -62
    38     -62
    38     -82
 

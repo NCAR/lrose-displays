@@ -64,6 +64,10 @@ def main():
                       dest='params_url',
                       default='http://front.eol.ucar.edu/displayParams/CIDD.pecan',
                       help='Set the full URL for CIDD params file. This activates if the --params option is not used.')
+    parser.add_option('--params_local',
+                      dest='params_local',
+                      default='',
+                      help="Set path of local params file. This will be provided to CIDD running in the container.")
 
     (options, args) = parser.parse_args()
     
@@ -116,14 +120,32 @@ def main():
             print("  OS: this is NOT a mac", file=sys.stderr)
         print("  displayStr: ", displayStr, file=sys.stderr)
 
+    # for local params make copy into /tmp
+
+    paramsLocal = False
+    localName = os.path.basename(options.params_local)
+    tmpDir = "/tmp/cidd_params"
+    if (len(options.params_local) > 0):
+        paramsLocal = True
+        try:
+            os.makedirs(tmpDir)
+        except:
+            if (options.verbose):
+                print("Info exists: ", tmpDir, file=sys.stderr)
+        shellCmd("rsync -av " + options.params_local + " " + tmpDir)
+
     # set up call for running docker
     
     cmd = "docker run -v $HOME/.Xauthority:/root/.Xauthority "
     cmd += "-v /tmp/cidd_images:/root/images "
+    if (paramsLocal):
+        cmd += "-v /tmp/cidd_params:/root/params "
     cmd += displayStr + " "
     cmd += options.docker_image + " "
     cmd += "/usr/local/cidd/bin/CIDD -font fixed -p "
-    if (len(options.params) > 0):
+    if (paramsLocal):
+        cmd += "/root/params/" + localName
+    elif (len(options.params) > 0):
         cmd += "http://front.eol.ucar.edu/displayParams/" + options.params
     else:
         cmd += options.params_url

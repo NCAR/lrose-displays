@@ -73,7 +73,9 @@ def main():
     # set DISPLAY string
 
     if (isOsx):
-        lrose_host_ip=subprocess.check_output(['ifconfig'])
+        ifconfig = subprocess.check_output(['ifconfig'])
+        for line in ifconfig.split("\n"):
+            print("line: ", line, file=sys.stderr)
         lrose_display_number=subprocess.check_output(['ps', '-e'])
         #lrose_host_ip=$(ifconfig | grep "inet " | grep -Fv 127.0.0.1 | awk '{print $2}' |head -1)
         #lrose_display_number=`ps -e | grep 'Xquartz :\d' | grep -v xinit | awk '{ print substr($5,2); }'`

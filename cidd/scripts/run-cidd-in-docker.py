@@ -88,8 +88,8 @@ def main():
         ps = subprocess.check_output(['ps', '-e'])
         for line in ps.split("\n"):
             if ((line.find("xinit") < 0) and
-                line.find("Xquartz") >= 0) and
-                line.find("listen") >= 0):
+                (line.find("Xquartz") >= 0) and
+                (line.find("listen") >= 0)):
                 displayNum = line.split(" ")[1]
 
         displayStr = "-e DISPLAY=" + ipaddr + displayNum

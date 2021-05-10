@@ -56,10 +56,14 @@ def main():
                       dest='docker_image',
                       default='ncareol/lrose-cidd',
                       help='Set the docker image to run. Should be in DockerHub.')
+    parser.add_option('--params',
+                      dest='params',
+                      default='',
+                      help="Set params file name. For example: 'CIDD.pecan'. In this case the URL would be 'http://front.eol.ucar.edu/displayParams/CIDD.pecan'. i.e. the param file name will be appended to the URL. If the --params option is not used, then the params_url will be used instead.")
     parser.add_option('--params_url',
                       dest='params_url',
                       default='http://front.eol.ucar.edu/displayParams/CIDD.pecan',
-                      help='Set URL for CIDD params file')
+                      help='Set the full URL for CIDD params file. This activates if the --params option is not used.')
 
     (options, args) = parser.parse_args()
     
@@ -119,7 +123,10 @@ def main():
     cmd += displayStr + " "
     cmd += options.docker_image + " "
     cmd += "/usr/local/cidd/bin/CIDD -font fixed -p "
-    cmd += options.params_url
+    if (len(options.params) > 0):
+        cmd += "http://front.eol.ucar.edu/displayParams/" + options.params
+    else:
+        cmd += options.params_url
     if (options.verbose):
         cmd += " -v 2"
 

@@ -81,7 +81,7 @@ def main():
         for line in ifconfig.split("\n"):
             if ((line.find("127.0.0.1") < 0) and
                 line.find("inet ") >= 0):
-                ipaddr = line.split(" ")[1]
+                ipaddr = line.split()[1]
         print("ipAddr: ", ipAddr, file=sys.stderr)
 
         displayNum = ":0"
@@ -90,7 +90,7 @@ def main():
             if ((line.find("xinit") < 0) and
                 (line.find("Xquartz") >= 0) and
                 (line.find("listen") >= 0)):
-                displayNum = line.split(" ")[1]
+                displayNum = line.split()[4]
 
         displayStr = "-e DISPLAY=" + ipaddr + displayNum
 

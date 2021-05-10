@@ -73,18 +73,31 @@ def main():
     # set DISPLAY string
 
     if (isOsx):
-        ipaddr = "localhost"
+
+        # APPLE OSX
+
+        ipAddr = "localhost"
         ifconfig = subprocess.check_output(['ifconfig'])
         for line in ifconfig.split("\n"):
-            if ((line.find("127.0.0.1") < 0) and line.find("inet ") >= 0):
+            if ((line.find("127.0.0.1") < 0) and
+                line.find("inet ") >= 0):
                 ipaddr = line.split(" ")[1]
-            #print("line: ", line, file=sys.stderr)
-        print("ipaddr: ", ipaddr, file=sys.stderr)
-        lrose_display_number=subprocess.check_output(['ps', '-e'])
-        #lrose_host_ip=$(ifconfig | grep "inet " | grep -Fv 127.0.0.1 | awk '{print $2}' |head -1)
-        #lrose_display_number=`ps -e | grep 'Xquartz :\d' | grep -v xinit | awk '{ print substr($5,2); }'`
-        displayStr = lrose_host_ip + " " + lrose_display_number
+        print("ipAddr: ", ipAddr, file=sys.stderr)
+
+        displayNum = ":0"
+        ps = subprocess.check_output(['ps', '-e'])
+        for line in ps.split("\n"):
+            if ((line.find("xinit") < 0) and
+                line.find("Xquartz") >= 0) and
+                line.find("listen") >= 0):
+                displayNum = line.split(" ")[1]
+
+        displayStr = "-e DISPLAY=" + ipaddr + displayNum
+
     else:
+
+        # LINUX
+
         displayStr = "-e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix"
 
     # debug

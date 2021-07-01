@@ -54,7 +54,7 @@ def main():
                       help='Set verbose debugging on')
     parser.add_option('--docker_image',
                       dest='docker_image',
-                      default='ncareol/lrose-cidd',
+                      default='nsflrose/lrose-cidd',
                       help='Set the docker image to run. Should be in DockerHub.')
     parser.add_option('--params',
                       dest='params',

@@ -50,8 +50,8 @@ def main():
                       help='Directory containing the DORADE data. Default is the current directory.')
     parser.add_option('--docker_image',
                       dest='docker_image',
-                      default='ncareol/soloii',
-                      help='Set the docker image to run. Should be in DockerHub. Default is "ncareol/soloii"')
+                      default='nsflrose/lrose-soloii',
+                      help='Set the docker image to run. Should be in DockerHub. Default is "nsflrose/lrose-soloii"')
 
     (options, args) = parser.parse_args()
 
@@ -113,7 +113,10 @@ def main():
     cmd = "docker run -v $HOME/.Xauthority:/root/.Xauthority "
     cmd += "-v " + dataDir + ":/data "
     cmd += displayStr + " "
-    cmd += options.docker_image + " /data"
+    cmd += options.docker_image + " "
+    cmd += "bash -c \"cd /data; /usr/bin/soloii\" "
+
+    print("Running command: ", cmd, file=sys.stderr)
 
     # run the command
 

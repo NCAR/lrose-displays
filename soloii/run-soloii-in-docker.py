@@ -114,7 +114,7 @@ def main():
     cmd += "-v " + dataDir + ":/data "
     cmd += displayStr + " "
     cmd += options.docker_image + " "
-    cmd += "bash -c \"cd /data; /usr/bin/soloii\" "
+    cmd += "bash -c \"cd /data; /usr/local/bin/soloii\" "
 
     print("Running command: ", cmd, file=sys.stderr)
 

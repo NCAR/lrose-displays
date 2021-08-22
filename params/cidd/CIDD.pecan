@@ -1979,8 +1979,8 @@ cidd.max_adeg:               360.0
 # List of comma delimited local directories or HTTP URLs to search
 # Searchs . then each directory/URL in order 
 
-cidd.color_file_subdir:   http://ncar.github.io/lrose-displays/color_scales
-cidd.map_file_subdir:     http://ncar.github.io/lrose-displays/maps
+cidd.color_file_subdir:   http://github.com/NCAR/lrose-displays/blob/master/color_scales
+cidd.map_file_subdir:     http://github.com/NCAR/lrose-displays/blob/master/maps
 
 #
 # Station locator features

@@ -70,6 +70,7 @@ def main():
 
         ipAddr = "localhost"
         ifconfig = subprocess.check_output(['ifconfig']).decode()
+        print("ifconfig: ", ifconfig, file=sys.stderr)
         for line in ifconfig.split("\n"):
             if ((line.find("127.0.0.1") < 0) and
                 line.find("inet ") >= 0):

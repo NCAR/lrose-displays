@@ -69,7 +69,7 @@ def main():
         # APPLE OSX
 
         ipAddr = "localhost"
-        ifconfig = subprocess.check_output(['ifconfig'])
+        ifconfig = subprocess.check_output(['ifconfig']).decode()
         for line in ifconfig.split("\n"):
             if ((line.find("127.0.0.1") < 0) and
                 line.find("inet ") >= 0):
@@ -77,7 +77,7 @@ def main():
         print("ipAddr: ", ipAddr, file=sys.stderr)
 
         displayNum = ":0"
-        ps = subprocess.check_output(['ps', '-e'])
+        ps = subprocess.check_output(['ps', '-e']).decode()
         for line in ps.split("\n"):
             if ((line.find("xinit") < 0) and
                 (line.find("Xquartz") >= 0) and

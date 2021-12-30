@@ -69,7 +69,8 @@ def main():
         # APPLE OSX
 
         ipAddr = "localhost"
-        ifconfig = subprocess.check_output(['ifconfig'])
+        ifconfig = subprocess.check_output(['ifconfig']).decode()
+        print("ifconfig: ", ifconfig, file=sys.stderr)
         for line in ifconfig.split("\n"):
             if ((line.find("127.0.0.1") < 0) and
                 line.find("inet ") >= 0):
@@ -77,7 +78,7 @@ def main():
         print("ipAddr: ", ipAddr, file=sys.stderr)
 
         displayNum = ":0"
-        ps = subprocess.check_output(['ps', '-e'])
+        ps = subprocess.check_output(['ps', '-e']).decode()
         for line in ps.split("\n"):
             if ((line.find("xinit") < 0) and
                 (line.find("Xquartz") >= 0) and
@@ -108,13 +109,23 @@ def main():
         print("  displayStr: ", displayStr, file=sys.stderr)
         print("  dataDir: ", dataDir, file=sys.stderr)
 
+    # get the sweep files in a list
+
+    sweepList = " "
+    allFiles = os.listdir(dataDir)
+    for file in allFiles:
+        if (file.find("swp.") == 0):
+            sweepList = sweepList + " ./" + file
+    print("  sweepList: ", sweepList, file=sys.stderr)
+
     # set up call for running docker
     
     cmd = "docker run -v $HOME/.Xauthority:/root/.Xauthority "
     cmd += "-v " + dataDir + ":/data "
     cmd += displayStr + " "
     cmd += options.docker_image + " "
-    cmd += "bash -c \"cd /data; /usr/local/bin/solo3\" "
+    bashcmd = "cd /data; /usr/local/bin/solo3 -f " + sweepList
+    cmd += 'bash -c \"' + bashcmd + '\"'
 
     # run the command
 

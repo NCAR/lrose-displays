@@ -1,0 +1,14 @@
+MAP_NAME imp_airfields.map
+# Airfields for ER-2 and P-3
+#
+ICONDEF CROSS 8
+0 -7
+0 7
+32767 32767
+-7 0 
+7 0
+32767 32767
+#
+ICON CROSS  37.9367    -75.4699   -8 -5 WFF
+ICON CROSS  32.0111    -81.1470   -8 -5 HAA
+ICON CROSS  39.8137    -84.0537   -16 -10 WPAFB

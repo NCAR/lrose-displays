@@ -1,0 +1,19 @@
+# colorscale for hail KE
+
+0       500     DarkSlateBlue
+500 	1000	NavyBlue
+1000	1500	Blue
+1500	2000	MediumBlue
+2000	2500	SkyBlue
+2500	3000 	DarkGreen
+3000	3500	ForestGreen
+3500	4000	YellowGreen
+4000 	4500	Gold
+4500	5000	Yellow
+5000	6000	Coral
+6000	7000	Orange
+7000	8000	MediumVioletRed
+8000	9000	OrangeRed
+9000	10000	Red
+10000	15000	Gray50
+15000	50000	gray20
